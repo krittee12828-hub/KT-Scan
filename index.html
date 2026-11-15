@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f5f2eb">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="FlowScan — แอปสแกนเอกสารด้วยกล้อง สแกนต่อเนื่องอัตโนมัติ ตัดขอบ ปรับภาพ ส่งออก PDF ทำงานในเบราว์เซอร์ ไม่อัปโหลดข้อมูล">
+<meta name="description" content="KT-Scan — แอปสแกนเอกสารด้วยกล้อง สแกนต่อเนื่องอัตโนมัติ ตัดขอบ ปรับภาพ ส่งออก PDF ทำงานในเบราว์เซอร์ ไม่อัปโหลดข้อมูล">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="FlowScan">
+<meta name="apple-mobile-web-app-title" content="KT-Scan">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>FlowScan — สแกนเอกสารต่อเนื่อง</title>
+<title>KT-Scan — สแกนเอกสารต่อเนื่อง</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='9' fill='%23e8470f'/%3E%3Cpath d='M9 12.5V10.5A1.5 1.5 0 0 1 10.5 9H12.5M19.5 9H21.5A1.5 1.5 0 0 1 23 10.5V12.5M23 19.5V21.5A1.5 1.5 0 0 1 21.5 23H19.5M12.5 23H10.5A1.5 1.5 0 0 1 9 21.5V19.5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M9 16H23' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -274,6 +274,27 @@ dialog::backdrop{background:rgba(12,9,4,.52);backdrop-filter:blur(3px)}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
+/* ---------- camera side buttons ---------- */
+.cam-side{position:absolute;right:calc(var(--sr) + 10px);top:62px;display:flex;flex-direction:column;gap:10px;z-index:3}
+.side-btn{width:54px;padding:7px 2px 6px;border-radius:14px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);color:#fff;display:grid;justify-items:center;gap:2px;font-size:.64rem;font-weight:700;line-height:1.15;text-align:center}
+.side-btn .i{width:22px;height:22px}
+.side-btn span{max-width:52px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.side-btn:active{background:rgba(255,255,255,.22)}
+/* ---------- donate ---------- */
+.donate-ic{color:var(--accent)}
+.donate-ic .i{fill:color-mix(in srgb,var(--accent) 22%,transparent)}
+.donate .chips button{min-width:58px}
+.donate .field input[type=number]{width:100%;min-height:46px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);outline:0;font-size:1rem}
+.donate .field input[type=number]:focus{border-color:var(--accent)}
+.dn-err{margin:0 0 8px;color:#d93a2b;font-weight:650;font-size:.9rem}
+.qrbox{display:grid;place-items:center;padding:14px;margin:6px auto 12px;background:#fff;border-radius:18px;width:min(310px,100%);box-shadow:inset 0 0 0 1.5px var(--line)}
+.qrbox canvas{width:100%;max-width:280px;height:auto;aspect-ratio:1;image-rendering:pixelated}
+.qrbox.off canvas{opacity:.12}
+.dn-to{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-radius:14px;background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--line);margin-bottom:10px}
+.dn-to small{display:block;color:var(--ink2);font-size:.76rem;font-weight:650}
+.dn-to b{font-size:1.15rem;letter-spacing:.02em}
+.field .hint{color:var(--ink2);font-size:.78rem;line-height:1.4}
+
 .doc-title{display:flex;align-items:center;gap:6px;min-width:0;padding:6px 8px;border-radius:12px;color:inherit}
 .doc-title:hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
 .doc-title .i{color:var(--ink2);flex:none}
@@ -318,6 +339,7 @@ dialog::backdrop{background:rgba(12,9,4,.52);backdrop-filter:blur(3px)}
 <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
 <symbol id="i-bolt-off" viewBox="0 0 24 24"><path d="M13 3L5 13.5h6L10 21l8-10.5h-6L13 3zM4 4l16 16"/></symbol>
 <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 4l9 5-9 5-9-5 9-5zM3 14l9 5 9-5"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.4S4.2 15.6 4.2 9.9A4.4 4.4 0 0 1 12 7.2a4.4 4.4 0 0 1 7.8 2.7c0 5.7-7.8 10.5-7.8 10.5z"/></symbol>
 <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></symbol>
 </defs>
 </svg>
@@ -329,9 +351,10 @@ dialog::backdrop{background:rgba(12,9,4,.52);backdrop-filter:blur(3px)}
   <header class="bar">
     <div class="brand">
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="9" fill="var(--accent)"/><path d="M9 12.5V10.5A1.5 1.5 0 0 1 10.5 9H12.5M19.5 9H21.5A1.5 1.5 0 0 1 23 10.5V12.5M23 19.5V21.5A1.5 1.5 0 0 1 21.5 23H19.5M12.5 23H10.5A1.5 1.5 0 0 1 9 21.5V19.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M9 16H23" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
-      <span>Flow<b>Scan</b></span>
+      <span>KT-<b>Scan</b></span>
     </div>
     <span class="grow"></span>
+    <button class="icon-btn donate-ic" id="btnHomeDonate" data-i18n-aria="donate.title"><svg class="i"><use href="#i-heart"/></svg></button>
     <button class="icon-btn" id="btnHomeSettings" data-i18n-aria="settings"><svg class="i"><use href="#i-sliders"/></svg></button>
   </header>
   <div class="scroll">
@@ -381,6 +404,10 @@ dialog::backdrop{background:rgba(12,9,4,.52);backdrop-filter:blur(3px)}
     <video id="camVideo" playsinline muted autoplay></video>
     <canvas id="camOv"></canvas>
     <div class="cam-hint" id="camHint"></div>
+    <div class="cam-side">
+      <button id="camColor" class="side-btn" data-i18n-aria="cam.colorMode"><svg class="i"><use href="#i-wand"/></svg><span id="camColorLbl"></span></button>
+      <button id="camHD" class="side-btn" data-i18n-aria="cam.hd"><svg class="i"><use href="#i-camera"/></svg><span>HD</span></button>
+    </div>
     <div class="cam-flash" id="camFx"></div>
     <div class="cam-zoom" id="camZoomBox" hidden><span id="camZoomVal">1×</span><input id="camZoom" type="range" min="1" max="4" step="0.1" value="1" data-i18n-aria="cam.zoom"></div>
     <div class="cam-msg" id="camMsg" hidden>
@@ -487,6 +514,7 @@ dialog::backdrop{background:rgba(12,9,4,.52);backdrop-filter:blur(3px)}
     <div class="pane" id="paneAdjust">
       <div class="slider"><span data-i18n="ed.bright"></span><input id="slBright" type="range" min="-100" max="100" step="1"><output id="outBright"></output></div>
       <div class="slider"><span data-i18n="ed.contrast"></span><input id="slContrast" type="range" min="-100" max="100" step="1"><output id="outContrast"></output></div>
+      <div class="slider"><span data-i18n="ed.sat"></span><input id="slSat" type="range" min="-100" max="100" step="1"><output id="outSat"></output></div>
       <div class="slider"><span data-i18n="ed.sharp"></span><input id="slSharp" type="range" min="0" max="100" step="1"><output id="outSharp"></output></div>
       <div class="ed-actions"><button id="edResetAdj" class="btn sm ghost" data-i18n="ed.reset"></button></div>
     </div>
@@ -508,15 +536,18 @@ dialog::backdrop{background:rgba(12,9,4,.52);backdrop-filter:blur(3px)}
     <div class="row"><div class="tx"><b data-i18n="st.theme"></b></div><select id="stTheme"><option value="auto" data-i18n="st.themeAuto"></option><option value="light" data-i18n="st.themeLight"></option><option value="dark" data-i18n="st.themeDark"></option></select></div>
     <div class="hr"></div>
     <div class="row"><div class="tx"><b data-i18n="st.hold"></b><span data-i18n="st.holdD"></span></div><select id="stHold"><option value="0.6" data-i18n="st.holdFast"></option><option value="1" data-i18n="st.holdNormal"></option><option value="1.6" data-i18n="st.holdSlow"></option><option value="2.4" data-i18n="st.holdVerySlow"></option></select></div>
-    <div class="row"><div class="tx"><b data-i18n="st.camRes"></b><span data-i18n="st.camResD"></span></div><select id="stRes"><option value="1280">HD 720p</option><option value="1920">Full HD 1080p</option><option value="3840">4K</option></select></div>
+    <div class="row"><div class="tx"><b data-i18n="st.camRes"></b><span data-i18n="st.camResD"></span></div><select id="stRes"><option value="1920">Full HD 1080p</option><option value="3840" data-i18n="st.res4k"></option><option value="8000" data-i18n="st.resMax"></option></select></div>
     <div class="row"><div class="tx"><b data-i18n="st.hiRes"></b><span data-i18n="st.hiResD"></span></div><label class="switch"><input type="checkbox" id="stHiRes"></label></div>
     <div class="row"><div class="tx"><b data-i18n="st.dup"></b><span data-i18n="st.dupD"></span></div><label class="switch"><input type="checkbox" id="stDup"></label></div>
+    <div class="row"><div class="tx"><b data-i18n="st.snap"></b><span data-i18n="st.snapD"></span></div><label class="switch"><input type="checkbox" id="stSnap"></label></div>
     <div class="row"><div class="tx"><b data-i18n="st.defFilter"></b><span data-i18n="st.defFilterD"></span></div><select id="stFilter"></select></div>
-    <div class="row"><div class="tx"><b data-i18n="st.capMax"></b><span data-i18n="st.capMaxD"></span></div><select id="stCap"><option value="2000">2000 px</option><option value="2800">2800 px</option><option value="4000">4000 px</option></select></div>
+    <div class="row"><div class="tx"><b data-i18n="st.capMax"></b><span data-i18n="st.capMaxD"></span></div><select id="stCap"><option value="4096">4096 px</option><option value="6144">6144 px</option><option value="8192">8192 px</option><option value="16000" data-i18n="st.capOrig"></option></select></div>
+    <div class="row"><div class="tx"><b data-i18n="st.crisp"></b><span data-i18n="st.crispD"></span></div><label class="switch"><input type="checkbox" id="stCrisp"></label></div>
     <div class="row"><div class="tx"><b data-i18n="st.sound"></b></div><label class="switch"><input type="checkbox" id="stSound"></label></div>
     <div class="row"><div class="tx"><b data-i18n="st.vibrate"></b></div><label class="switch"><input type="checkbox" id="stVib"></label></div>
     <div class="row"><div class="tx"><b data-i18n="st.grid"></b></div><label class="switch"><input type="checkbox" id="stGrid"></label></div>
     <div class="hr"></div>
+    <div class="row"><div class="tx"><b data-i18n="st.donate"></b><span data-i18n="st.donateD"></span></div><button id="stDonate" class="btn sm primary"><svg class="i s"><use href="#i-heart"/></svg><span data-i18n="donate.btn"></span></button></div>
     <div class="row"><div class="tx"><b data-i18n="st.storage"></b><span id="stStorage">—</span></div><button id="stWipe" class="btn sm danger" data-i18n="st.wipe"></button></div>
     <p class="note"><svg class="i s" style="vertical-align:-3px"><use href="#i-lock"/></svg> <span data-i18n="st.privacy"></span></p>
     <p class="note" id="stAbout"></p>
@@ -530,9 +561,10 @@ dialog::backdrop{background:rgba(12,9,4,.52);backdrop-filter:blur(3px)}
     <div class="field"><span class="lbl" data-i18n="export.format"></span>
       <div class="chips" id="exFormat"><button data-v="pdf" class="on">PDF</button><button data-v="jpg">JPG</button><button data-v="png">PNG</button></div></div>
     <div class="field" id="exSizeBox"><label for="exSize" data-i18n="export.pageSize"></label>
-      <select id="exSize"><option value="a4">A4</option><option value="letter">Letter</option><option value="a5">A5</option><option value="fit" data-i18n="export.fit"></option></select></div>
+      <select id="exSize"><option value="auto" data-i18n="export.auto"></option><option value="a4">A4</option><option value="letter">Letter</option><option value="legal">Legal</option><option value="a5">A5</option><option value="fit" data-i18n="export.fit"></option></select></div>
     <div class="field"><label for="exQuality" data-i18n="export.quality"></label>
-      <select id="exQuality"><option value="small" data-i18n="export.qSmall"></option><option value="std" data-i18n="export.qStd"></option><option value="high" data-i18n="export.qHigh"></option></select></div>
+      <select id="exQuality"><option value="small" data-i18n="export.qSmall"></option><option value="std" data-i18n="export.qStd"></option><option value="high" data-i18n="export.qHigh"></option><option value="print" data-i18n="export.qPrint"></option></select>
+      <small class="hint" data-i18n="export.qNote"></small></div>
     <div class="field" id="exScopeBox" hidden><span class="lbl" data-i18n="export.pages"></span>
       <div class="chips" id="exScope"><button data-v="all" class="on"></button><button data-v="sel"></button></div></div>
     <p class="note" id="exInfo"></p>
@@ -541,6 +573,24 @@ dialog::backdrop{background:rgba(12,9,4,.52);backdrop-filter:blur(3px)}
     <button id="exPrint" class="btn ghost"><svg class="i s"><use href="#i-print"/></svg><span data-i18n="export.print"></span></button>
     <button id="exShare" class="btn ghost" hidden><svg class="i s"><use href="#i-share"/></svg><span data-i18n="export.share"></span></button>
     <button id="exGo" class="btn primary"><svg class="i s"><use href="#i-download"/></svg><span data-i18n="export.download"></span></button>
+  </div>
+</dialog>
+
+<dialog id="dlgDonate" aria-labelledby="dnTitle">
+  <div class="sheet-h"><h2 id="dnTitle" data-i18n="donate.title"></h2><button class="icon-btn" data-close data-i18n-aria="close"><svg class="i"><use href="#i-close"/></svg></button></div>
+  <div class="sheet-b donate">
+    <p class="note" data-i18n="donate.intro"></p>
+    <div class="field"><span class="lbl" data-i18n="donate.amount"></span>
+      <div class="chips" id="dnAmts"><button data-v="10">10</button><button data-v="20">20</button><button data-v="50" class="on">50</button><button data-v="100">100</button><button data-v="500">500</button></div></div>
+    <div class="field"><label for="dnCustom" data-i18n="donate.custom"></label><input type="number" id="dnCustom" inputmode="decimal" min="10" max="100000" step="1" placeholder="10"></div>
+    <p class="dn-err" id="dnErr" role="alert" hidden></p>
+    <div class="qrbox" id="dnQrBox"><canvas id="dnQr" width="10" height="10" aria-label="PromptPay QR"></canvas></div>
+    <div class="dn-to"><div><small data-i18n="donate.to"></small><b id="dnNum">084-095-8691</b></div><button id="dnCopy" class="btn sm ghost"><svg class="i s"><use href="#i-copy"/></svg><span data-i18n="donate.copy"></span></button></div>
+    <p class="note" data-i18n="donate.note"></p>
+  </div>
+  <div class="sheet-f">
+    <button id="dnSave" class="btn ghost"><svg class="i s"><use href="#i-download"/></svg><span data-i18n="donate.save"></span></button>
+    <button id="dnDone" class="btn primary"><svg class="i s"><use href="#i-heart"/></svg><span data-i18n="donate.done"></span></button>
   </div>
 </dialog>
 
@@ -585,7 +635,7 @@ dialog::backdrop{background:rgba(12,9,4,.52);backdrop-filter:blur(3px)}
 <input type="file" id="fileImport" accept="image/*" multiple hidden>
 <input type="file" id="fileShot" accept="image/*" capture="environment" hidden>
 
-<script>
+<script id="coreSrc">
 /* =====================================================================
    CORE — pure algorithms (no DOM). Works in browser and in Node tests.
    - document edge detection (edges + brightness segmentation + line refine)
@@ -785,28 +835,22 @@ function percentileU16(arr, p, maxV) {
   return maxV;
 }
 
-function dilate(mask, w, h, iter) {
-  let cur = mask;
-  for (let it = 0; it < iter; it++) {
-    const tmp = new Uint8Array(w * h), out = new Uint8Array(w * h);
-    for (let y = 0; y < h; y++) {
-      const r = y * w;
-      for (let x = 0; x < w; x++) {
-        if (cur[r + x] || (x > 0 && cur[r + x - 1]) || (x < w - 1 && cur[r + x + 1])) tmp[r + x] = 1;
-      }
-    }
-    for (let y = 0; y < h; y++) {
-      const r = y * w;
-      for (let x = 0; x < w; x++) {
-        if (tmp[r + x] || (y > 0 && tmp[r - w + x]) || (y < h - 1 && tmp[r + w + x])) out[r + x] = 1;
-      }
-    }
-    cur = out;
+/* square max / min filter of radius r with sliding window sums (O(n), independent of r); outside the image counts as "not set" for dilate and "set" for erode */
+function windowAny(src, w, h, r, wantZero) {
+  const tmp = new Uint8Array(w * h), out = new Uint8Array(w * h), cs = new Int32Array(Math.max(w, h) + 1);
+  const hit = wantZero ? (v) => (v ? 0 : 1) : (v) => (v ? 1 : 0);
+  for (let y = 0; y < h; y++) {
+    const row = y * w;
+    for (let x = 0; x < w; x++) cs[x + 1] = cs[x] + hit(src[row + x]);
+    for (let x = 0; x < w; x++) { const x0 = x - r < 0 ? 0 : x - r, x1 = x + r + 1 > w ? w : x + r + 1; tmp[row + x] = cs[x1] - cs[x0] > 0 ? 1 : 0; }
   }
-  return cur;
+  for (let x = 0; x < w; x++) {
+    for (let y = 0; y < h; y++) cs[y + 1] = cs[y] + tmp[y * w + x];
+    for (let y = 0; y < h; y++) { const y0 = y - r < 0 ? 0 : y - r, y1 = y + r + 1 > h ? h : y + r + 1; out[y * w + x] = cs[y1] - cs[y0] > 0 ? 1 : 0; }
+  }
+  return out;
 }
-
-/* mark everything reachable from the frame border through non-blocked pixels */
+function dilate(mask, w, h, iter) { return iter > 0 ? windowAny(mask, w, h, iter, false) : mask; }
 function floodOutside(block, w, h) {
   const n = w * h, out = new Uint8Array(n), stack = new Int32Array(n);
   let sp = 0;
@@ -940,7 +984,56 @@ function refineQuad(Q, S, rad, thrEdge) {
   return { quad: out, supports };
 }
 
-/* ------------------------------------------------------------------ document detection */
+/* ------------------------------------------------------------------ document vs. background detection (v2)
+   Many independent "what could the page be" proposals (edges, global/local brightness, saturation, distance from the
+   frame-border background) are turned into quads, refined on real edges, and then judged on evidence that is independent
+   of size: edge support, contrast across the boundary, paper-like (smooth, single-colour) interior, shape and aspect. */
+const STD_RATIOS = [   // long/short of the paper sizes people actually scan
+  ['a', 1.4142, 'A4'], ['letter', 1.2941, 'Letter'], ['legal', 1.6471, 'Legal'], ['card', 1.5858, 'ID']
+];
+function classifyRatio(r) {            // r = long/short (>=1)
+  if (!(r >= 1)) r = 1 / r;
+  if (r >= 2.1) return { kind: 'receipt', label: 'Receipt', ratio: r, snap: r, err: 0 };
+  let best = null;
+  for (const [kind, ratio, label] of STD_RATIOS) {
+    const e = Math.abs(Math.log(r / ratio));
+    if (!best || e < best.err) best = { kind, label, ratio, err: e };
+  }
+  if (best.err > 0.045) return { kind: 'free', label: '', ratio: r, snap: r, err: best.err };
+  return { kind: best.kind, label: best.err <= 0.035 ? best.label : '', ratio: r, snap: best.ratio, err: best.err };
+}
+
+/* rectified width/height of a quad (tl,tr,br,bl in px) assuming square pixels & principal point at the image centre
+   (Zhang & He, "Whiteboard scanning"); falls back to edge lengths when the geometry is degenerate */
+function quadAspect(Q, imgW, imgH, mode) {
+  if (!mode) {                              // consensus: the free-focal estimate is precise but unstable for near-frontal views; trust it only when the fixed-focal estimate agrees
+    const fx = quadAspect(Q, imgW, imgH, 'fixed'), fr = quadAspect(Q, imgW, imgH, 'free');
+    return fr.exact && Math.abs(Math.log(fr.ratio / fx.ratio)) < 0.06 ? fr : fx;
+  }
+  const d = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+  const edgeA = (d(Q[0], Q[1]) + d(Q[3], Q[2])) / Math.max(1e-6, d(Q[0], Q[3]) + d(Q[1], Q[2]));
+  if (!imgW || !imgH) return { ratio: edgeA, exact: false };
+  const u0 = imgW / 2, v0 = imgH / 2;
+  const m1 = [Q[0][0] - u0, Q[0][1] - v0, 1], m2 = [Q[1][0] - u0, Q[1][1] - v0, 1],
+        m3 = [Q[3][0] - u0, Q[3][1] - v0, 1], m4 = [Q[2][0] - u0, Q[2][1] - v0, 1];
+  const cr = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const c14 = cr(m1, m4), c24 = cr(m2, m4), c34 = cr(m3, m4);
+  const k2d = dot(c24, m3), k3d = dot(c34, m2);
+  if (Math.abs(k2d) < 1e-9 || Math.abs(k3d) < 1e-9) return { ratio: edgeA, exact: false };
+  const k2 = dot(c14, m3) / k2d, k3 = dot(c14, m2) / k3d;
+  const n2 = [k2 * m2[0] - m1[0], k2 * m2[1] - m1[1], k2 * m2[2] - m1[2]];
+  const n3 = [k3 * m3[0] - m1[0], k3 * m3[1] - m1[1], k3 * m3[2] - m1[2]];
+  const den = n2[2] * n3[2], mxd = Math.max(imgW, imgH);
+  let f2 = Math.abs(den) > 1e-12 ? -(n2[0] * n3[0] + n2[1] * n3[1]) / den : NaN;
+  let exact = true;
+  if (mode !== 'free' || !(f2 >= (0.4 * mxd) ** 2 && f2 <= (4 * mxd) ** 2)) { f2 = mxd * mxd; exact = false; }   // assume a typical phone focal length (~ the longer image side)
+  const a2 = ((n2[0] * n2[0] + n2[1] * n2[1]) / f2 + n2[2] * n2[2]) / ((n3[0] * n3[0] + n3[1] * n3[1]) / f2 + n3[2] * n3[2]);
+  const r = Math.sqrt(a2);
+  if (!isFinite(r) || r < 0.1 || r > 10 || r / edgeA > 1.7 || edgeA / r > 1.7) return { ratio: edgeA, exact: false };
+  return { ratio: r, exact };
+}
+
 function quadStats(Q, w, h) {
   const area = polyArea(Q), frac = area / (w * h);
   const dev = quadAngleDev(Q);
@@ -949,99 +1042,277 @@ function quadStats(Q, w, h) {
   return { area, frac, dev, convex, inside };
 }
 
-function preScore(st, quadness, minFrac) {
-  if (!st.convex || st.frac < minFrac || st.frac > 0.975 || st.dev > 48) return 0;
-  const areaS = Math.sqrt(Math.min(st.frac, 0.5) / 0.5);
-  const angS = st.dev <= 12 ? 1 : clamp(1 - (st.dev - 12) / 36, 0, 1);
-  const quadS = clamp((quadness - 0.7) / 0.28, 0, 1);
-  return areaS * angS * quadS * (st.inside ? 1 : 0.55);
+function integralImage(g, w, h) {
+  const W1 = w + 1, I = new Int32Array(W1 * (h + 1));
+  for (let y = 0; y < h; y++) {
+    let row = 0;
+    for (let x = 0; x < w; x++) { row += g[y * w + x]; I[(y + 1) * W1 + x + 1] = I[y * W1 + x + 1] + row; }
+  }
+  return I;
+}
+function erode(mask, w, h, iter) {
+  if (!(iter > 0)) return mask;
+  const z = windowAny(mask, w, h, iter, true), out = new Uint8Array(w * h);
+  for (let i = 0; i < out.length; i++) out[i] = z[i] ? 0 : 1;
+  return out;
+}
+
+/* what the inside of the quad looks like: smooth fraction, ink (strong small edges), brightness, saturation, colour spread */
+function interiorStats(Q, S, d, w, h) {
+  const cx = (Q[0][0] + Q[1][0] + Q[2][0] + Q[3][0]) / 4, cy = (Q[0][1] + Q[1][1] + Q[2][1] + Q[3][1]) / 4;
+  const q = Q.map((p) => [cx + (p[0] - cx) * 0.72, cy + (p[1] - cy) * 0.72]);   // stay clear of the blurred border
+  let x0 = w, x1 = 0, y0 = h, y1 = 0;
+  q.forEach((p) => { x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]); y0 = Math.min(y0, p[1]); y1 = Math.max(y1, p[1]); });
+  x0 = Math.max(1, Math.floor(x0)); y0 = Math.max(1, Math.floor(y0)); x1 = Math.min(w - 2, Math.ceil(x1)); y1 = Math.min(h - 2, Math.ceil(y1));
+  const step = Math.max(1, Math.round(Math.sqrt(((x1 - x0) * (y1 - y0)) / 4000)));
+  let n = 0, low = 0, ink = 0, sa = 0, sb = 0, saa = 0, sbb = 0, sL = 0, sSat = 0;
+  const mag = S.mag;
+  for (let y = y0; y <= y1; y += step) {
+    for (let x = x0; x <= x1; x += step) {
+      if (!pointInQuad(q, x, y)) continue;
+      n++;
+      const i = y * w + x, j = i * 4, r = d[j], g = d[j + 1], b = d[j + 2];
+      const mxv = Math.max(r, g, b), mnv = Math.min(r, g, b);
+      sL += (r + g + b) / 3; sSat += mxv ? (mxv - mnv) / mxv : 0;
+      if (mag[i] < 34) { low++; const A = r - g, B = b - g; sa += A; sb += B; saa += A * A; sbb += B * B; }
+      if (mag[i] >= 26) ink++;
+    }
+  }
+  if (n < 12) return { low: 0, ink: 0, chroma: 40, meanL: 128, meanSat: 0.3, n };
+  const lw = Math.max(1, low);
+  const va = saa / lw - (sa / lw) ** 2, vb = sbb / lw - (sb / lw) ** 2;
+  return { low: low / n, ink: ink / n, chroma: Math.sqrt(Math.max(0, va + vb)), meanL: sL / n, meanSat: sSat / n, n };
+}
+
+/* contrast across each side of the quad (inside vs just outside) */
+function boundaryStats(Q, d, w, h) {
+  const off = Math.max(3, 0.011 * Math.max(w, h));
+  const sides = [];
+  const mean3 = (x, y) => {
+    let r = 0, g = 0, b = 0;
+    for (let yy = -1; yy <= 1; yy++) for (let xx = -1; xx <= 1; xx++) { const j = ((y + yy) * w + (x + xx)) * 4; r += d[j]; g += d[j + 1]; b += d[j + 2]; }
+    return [r / 9, g / 9, b / 9];
+  };
+  for (let i = 0; i < 4; i++) {
+    const p = Q[i], q = Q[(i + 1) % 4], dx = q[0] - p[0], dy = q[1] - p[1], L = Math.hypot(dx, dy);
+    const ux = dx / L, uy = dy / L, nx = uy, ny = -ux;                  // outward normal for a clockwise (screen) quad
+    const onFrame = (p[0] < 2 && q[0] < 2) || (p[0] > w - 3 && q[0] > w - 3) || (p[1] < 2 && q[1] < 2) || (p[1] > h - 3 && q[1] > h - 3);
+    const N = clamp(Math.round(L / 5), 8, 60), cs = [], sg = [];
+    for (let k = 0; k < N; k++) {
+      const t = 0.1 + 0.8 * (k + 0.5) / N, bx = p[0] + dx * t, by = p[1] + dy * t;
+      const ix = Math.round(bx - nx * off), iy = Math.round(by - ny * off), ox = Math.round(bx + nx * off), oy = Math.round(by + ny * off);
+      if (ix < 1 || iy < 1 || ix >= w - 1 || iy >= h - 1 || ox < 1 || oy < 1 || ox >= w - 1 || oy >= h - 1) continue;
+      const a = mean3(ix, iy), b = mean3(ox, oy);
+      const dr = a[0] - b[0], dg = a[1] - b[1], db = a[2] - b[2];
+      cs.push(Math.sqrt((dr * dr + dg * dg + db * db) / 3));
+      sg.push((a[0] + a[1] + a[2]) - (b[0] + b[1] + b[2]) >= 0 ? 1 : -1);
+    }
+    if (onFrame || cs.length < N * 0.35) { sides.push({ frame: true, valid: cs.length / N }); continue; }
+    cs.sort((u, v) => u - v);
+    const med = cs[(cs.length / 2) | 0], q25 = cs[(cs.length / 4) | 0];
+    sides.push({ frame: false, med, q25, sign: sg.reduce((u, v) => u + v, 0) / sg.length, valid: cs.length / N });
+  }
+  return sides;
+}
+
+function scoreCandidate(Q, sup, S, d, w, h, opt, ps) {
+  const st = quadStats(Q, w, h);
+  if (!st.convex || st.frac < (opt.minArea || 0.02) * 0.75 || st.frac > 0.985) return null;
+  const onFrame = (p, q) => (p[0] < 2 && q[0] < 2) || (p[0] > w - 3 && q[0] > w - 3) || (p[1] < 2 && q[1] < 2) || (p[1] > h - 3 && q[1] > h - 3);
+  let nFrame = 0;
+  const sv = sup.map((s, i) => { if (onFrame(Q[i], Q[(i + 1) % 4])) { nFrame++; return 0.85; } return s; });
+  if (nFrame >= 3 || (nFrame >= 2 && st.frac > 0.45)) return null;                                     // hugging the frame on 3+ sides: that is the surface, not a page
+  const support = 0.6 * ((sv[0] + sv[1] + sv[2] + sv[3]) / 4) + 0.4 * Math.min(sv[0], sv[1], sv[2], sv[3]);
+  const bs = boundaryStats(Q, d, w, h);
+  const real = bs.filter((s) => !s.frame);
+  let cScore = 0.55, coherent = 1;
+  if (real.length) {
+    const meds = real.map((s) => s.med), minC = Math.min.apply(null, meds), meanC = meds.reduce((a, b) => a + b, 0) / meds.length;
+    cScore = 0.5 * clamp((minC - 3) / 14, 0, 1) + 0.5 * clamp((meanC - 5) / 22, 0, 1);
+    const sgn = real.reduce((a, s) => a + s.sign * s.med, 0) / Math.max(1e-6, real.reduce((a, s) => a + s.med, 0));
+    coherent = Math.abs(sgn) >= 0.55 ? 1 : 0.6;                     // the paper is lighter (or darker) than its surroundings on all sides
+  }
+  const inS = interiorStats(Q, S, d, w, h);
+  /* "does the inside look like a sheet of paper?" — printed ink gives small strong edges (a flat dark/colour block does not),
+     paper is light and not strongly coloured, and it is smooth between the ink (carpet / wood / checker patterns are not) */
+  const printed = clamp((inS.ink - 0.03) / 0.12, 0, 1);
+  const textF = 0.55 + 0.45 * printed;
+  const lumaF = 0.3 + 0.7 * clamp((inS.meanL - 45) / 110, 0, 1);
+  const satF = 1 - 0.35 * clamp((inS.meanSat - 0.25) / 0.35, 0, 1);
+  const base = lumaF * satF;
+  const factor = base + (1 - base) * 0.55 * printed;                // printed objects (cards, coloured forms) are paper-like even when not white
+  const smoothF = 0.6 + 0.4 * clamp((inS.low - 0.3) / 0.4, 0, 1);
+  const flatColour = 1 - 0.75 * clamp(1 - (inS.ink - 0.02) / 0.08, 0, 1) * clamp((inS.meanSat - 0.2) / 0.2, 0, 1);   // plain coloured block (sticky note, mat): not a document
+  const paperRaw = textF * factor * smoothF * flatColour * (1 - clamp((inS.chroma - 30) / 60, 0, 0.3));
+  const asp = quadAspect(Q, w, h);
+  const rr = asp.ratio >= 1 ? asp.ratio : 1 / asp.ratio;
+  if (rr > 8) return null;
+  const cls = classifyRatio(rr);
+  let prior = cls.kind === 'free' ? 0.93 : 0.93 + 0.07 * (1 - cls.err / 0.045);
+  if (opt.prefer && opt.prefer !== 'auto') {
+    const want = { a: 'a', letter: 'letter', card: 'card', receipt: 'receipt', legal: 'legal' }[opt.prefer];
+    if (want) prior *= cls.kind === want ? 1.08 : 0.82;
+  }
+  const dev = st.dev, angS = dev <= 12 ? 1 : clamp(1 - (dev - 12) / 36, 0, 1);
+  const sideRatio = Math.max(Math.hypot(Q[0][0] - Q[1][0], Q[0][1] - Q[1][1]) / Math.max(1, Math.hypot(Q[3][0] - Q[2][0], Q[3][1] - Q[2][1])),
+                             Math.hypot(Q[0][0] - Q[3][0], Q[0][1] - Q[3][1]) / Math.max(1, Math.hypot(Q[1][0] - Q[2][0], Q[1][1] - Q[2][1])));
+  const sideS = Math.max(sideRatio, 1 / sideRatio) > 2.4 ? 0.7 : 1;
+  const sizeS = clamp(0.55 + 0.45 * (st.frac - 0.01) / 0.04, 0.4, 1) * (st.frac > 0.92 ? clamp(1 - (st.frac - 0.92) * 5, 0.5, 1) : 1);
+  const mx = (Q[0][0] + Q[1][0] + Q[2][0] + Q[3][0]) / 4 / w - 0.5, my = (Q[0][1] + Q[1][1] + Q[2][1] + Q[3][1]) / 4 / h - 0.5;
+  const centre = 1 - 0.12 * clamp(Math.hypot(mx, my) / 0.5, 0, 1);
+  const quadS = ps ? clamp(0.6 + 0.4 * ps.quadness, 0.6, 1) : 1;
+  const cutOff = nFrame ? Math.pow(0.7, nFrame) : 1;               // a page running out of the frame is not a complete scan
+  const score = cutOff * sizeS * (0.1 + 0.9 * support) * (0.12 + 0.88 * cScore) * (0.1 + 0.9 * paperRaw) * angS * sideS * prior * centre * coherent * quadS;
+  return { score, support, contrast: cScore, paper: paperRaw, inS, nFrame, frac: st.frac, dev, aspect: rr, wh: asp.ratio, kind: cls.kind, label: cls.label, exact: asp.exact };
 }
 
 /**
- * detectDocument(img) -> { quad:[{x,y}*4] (normalised, tl,tr,br,bl), score, support, frac, ok } | null
+ * detectDocument(img, opt) -> { quad:[{x,y}*4] (normalised, tl,tr,br,bl), score, support, contrast, paper, frac,
+ *                               aspect (long/short), kind ('a'|'letter'|'legal'|'card'|'receipt'|'photo'|'sq'|'free'), label, ok } | null
  * img: {width,height,data(RGBA)}  (works best when longest side ~ 280–640 px)
+ * opt: { minArea (frame fraction, default 0.02), prefer ('auto'|'a'|'letter'|'card'|'receipt'|'legal'), okScore, okSupport }
  */
 function detectDocument(img, opt) {
   opt = opt || {};
-  const w = img.width, h = img.height, n = w * h;
-  const minFrac = opt.minArea || 0.10;
-  const g = boxBlur3(boxBlur3(grayFromRGBA(img.data, w, h), w, h), w, h);
+  const w = img.width, h = img.height, n = w * h, d = img.data;
+  const minFrac = opt.minArea || 0.02;
+  const mx = Math.max(w, h);
+  const g = boxBlur3(boxBlur3(grayFromRGBA(d, w, h), w, h), w, h);
   const S = sobel(g, w, h);
-  const diag = Math.hypot(w, h);
-  const rad = Math.max(3, Math.round(0.016 * Math.max(w, h)));
+  const rad = Math.max(3, Math.round(0.016 * mx));
   const cands = [];
 
-  function addComponents(mask, tag, edgeBias) {
+  function addComponents(mask, tag, close) {
+    if (close) mask = erode(dilate(mask, w, h, close), w, h, close);
     const { lab, comps } = labelMask(mask, w, h);
     comps.sort((a, b) => b.area - a.area);
     let used = 0;
     for (const c of comps) {
-      if (used >= 3 || c.area < n * minFrac * 0.6) break;
+      if (used >= 6 || c.area < n * minFrac * 0.7) break;
+      const sides = (c.minx <= 1) + (c.maxx >= w - 2) + (c.miny <= 1) + (c.maxy >= h - 2);
+      if (sides >= 3 && c.area > n * 0.55) continue;                 // that is the table, not the page
       const bpts = componentBoundary(lab, c, w, h);
       if (bpts.length < 8) continue;
       const hull = convexHull(bpts);
       if (hull.length < 4) continue;
       const hullA = polyArea(hull);
       let Q = hullToQuad(hull) || extremeQuad(hull);
-      Q = orderQuad(Q.map(p => [clamp(p[0], 0, w - 1), clamp(p[1], 0, h - 1)]));
+      Q = orderQuad(Q.map((p) => [clamp(p[0], 0, w - 1), clamp(p[1], 0, h - 1)]));
       const st = quadStats(Q, w, h);
+      if (!st.convex || st.frac < minFrac * 0.75 || st.frac > 0.975 || st.dev > 48) continue;
       const quadness = Math.min(1, hullA / Math.max(1, st.area));
-      const ps = preScore(st, quadness, minFrac);
+      if (quadness < 0.72) continue;
       used++;
-      if (ps > 0) cands.push({ Q, ps, tag, edgeBias });
+      cands.push({ Q, quadness, tag, ps: quadness * (st.dev <= 12 ? 1 : clamp(1 - (st.dev - 12) / 36, 0, 1)) * (0.5 + 0.5 * Math.min(1, Math.sqrt(st.frac / 0.08))) });
     }
   }
 
-  /* method 1: edge enclosed region */
   const mags = S.mag;
   const p95 = percentileU16(mags, 0.95, 2040);
   const thrE = clamp(p95 * 0.5, 40, 130);
-  const dil = Math.max(1, Math.round(Math.max(w, h) / 170));
-  const edge = new Uint8Array(n);
-  for (let i = 0; i < n; i++) edge[i] = mags[i] >= thrE ? 1 : 0;
-  const ed = dilate(edge, w, h, dil);
-  const outside = floodOutside(ed, w, h);
-  const enclosed = new Uint8Array(n);
-  for (let i = 0; i < n; i++) enclosed[i] = outside[i] ? 0 : 1;
-  addComponents(enclosed, 'edge', dil + 1);
+  const dil = Math.max(1, Math.round(mx / 170));
+  const enclosedBy = (thr, di) => {
+    const edge = new Uint8Array(n);
+    for (let i = 0; i < n; i++) edge[i] = mags[i] >= thr ? 1 : 0;
+    const outside = floodOutside(dilate(edge, w, h, di), w, h);
+    const enc = new Uint8Array(n);
+    for (let i = 0; i < n; i++) enc[i] = outside[i] ? 0 : 1;
+    return enc;
+  };
 
-  /* method 2/3: brightness segmentation (paper brighter / darker than surroundings) */
+  const uniq = [];
+  let best = null, done = 0;
+  const diag = Math.hypot(w, h);
+  function evaluate() {                                              // refine + score every new proposal, keep the best
+    cands.sort((a, b) => b.ps - a.ps);
+    const fresh = [];
+    for (const c of cands) {
+      if (uniq.some((u) => u.Q.every((p, i) => Math.hypot(p[0] - c.Q[i][0], p[1] - c.Q[i][1]) < 0.025 * diag))) continue;
+      uniq.push(c); fresh.push(c);
+    }
+    cands.length = 0;
+    for (const c of fresh.slice(0, 12)) {
+      let bestHere = null;
+      for (const thrEdge of [Math.max(26, thrE * 0.35), 15]) {
+        let Q = c.Q, sup = [0, 0, 0, 0];
+        for (let pass = 0; pass < 2; pass++) {
+          const r = refineQuad(Q, S, pass === 0 ? rad : Math.max(2, Math.round(rad / 2)), thrEdge);
+          if (!r) break;
+          const Qn = orderQuad(r.quad), st = quadStats(Qn, w, h);
+          if (!st.convex || st.frac < minFrac * 0.6 || st.dev > 50) break;
+          Q = Qn; sup = r.supports;
+        }
+        const sc = scoreCandidate(Q, sup, S, d, w, h, opt, c);
+        if (sc && (!bestHere || sc.score > bestHere.score)) bestHere = Object.assign(sc, { Q, tag: c.tag });
+        if (bestHere && bestHere.support >= 0.6) break;             // strong edges found, no need for the sensitive pass
+      }
+      if (opt.debug && bestHere) (opt.debug.list = opt.debug.list || []).push(Object.assign({}, bestHere, { Q: bestHere.Q.map((p) => p.map((v) => Math.round(v))) }));
+      if (bestHere && (!best || bestHere.score > best.score)) best = bestHere;
+    }
+  }
+  const confident = () => best && best.score >= 0.72 && best.support >= 0.85 && !opt.thorough;
+
+  /* stage 1 — cheap proposals: regions enclosed by strong edges, global brightness */
+  addComponents(enclosedBy(thrE, dil), 'edge', 0);
   const t = otsu(g);
   const bright = new Uint8Array(n), dark = new Uint8Array(n);
   for (let i = 0; i < n; i++) { if (g[i] > t) bright[i] = 1; else dark[i] = 1; }
-  addComponents(bright, 'bright', 0);
-  addComponents(dark, 'dark', 0);
+  addComponents(bright, 'bright', 1);
+  addComponents(dark, 'dark', 1);
+  evaluate();
 
-  if (!cands.length) return null;
-  cands.sort((a, b) => b.ps - a.ps);
-
-  const thrEdge = Math.max(26, thrE * 0.35);
-  let best = null;
-  for (const c of cands.slice(0, 5)) {
-    let Q = c.Q;
-    let sup = [0, 0, 0, 0];
-    for (let pass = 0; pass < 2; pass++) {
-      const r = refineQuad(Q, S, pass === 0 ? rad : Math.max(2, Math.round(rad / 2)), thrEdge);
-      if (!r) break;
-      const Qn = orderQuad(r.quad);
-      const st = quadStats(Qn, w, h);
-      if (!st.convex || st.frac < minFrac * 0.8 || st.dev > 50) break;
-      Q = Qn; sup = r.supports;
+  /* stage 2 — harder surfaces: sensitive edges, local contrast, colour distance from the frame border, saturation */
+  if (!confident()) {
+    addComponents(enclosedBy(clamp(p95 * 0.3, 22, 60), dil + 1), 'edge2', 0);
+    const I = integralImage(g, w, h), W1 = w + 1;
+    for (const frac of [0.12, 0.3]) {
+      const r = Math.max(6, Math.round(frac * mx));
+      const lb = new Uint8Array(n), ld = new Uint8Array(n);
+      for (let y = 0; y < h; y++) {
+        const ya = Math.max(0, y - r), yb = Math.min(h, y + r + 1);
+        for (let x = 0; x < w; x++) {
+          const xa = Math.max(0, x - r), xb = Math.min(w, x + r + 1);
+          const m = (I[yb * W1 + xb] - I[ya * W1 + xb] - I[yb * W1 + xa] + I[ya * W1 + xa]) / ((xb - xa) * (yb - ya));
+          const dv = g[y * w + x] - m;
+          if (dv > 9) lb[y * w + x] = 1; else if (dv < -9) ld[y * w + x] = 1;
+        }
+      }
+      addComponents(lb, 'lbright', 2);
+      addComponents(ld, 'ldark', 2);
     }
-    const st = quadStats(Q, w, h);
-    const sMean = (sup[0] + sup[1] + sup[2] + sup[3]) / 4, sMin = Math.min(sup[0], sup[1], sup[2], sup[3]);
-    const support = 0.6 * sMean + 0.4 * sMin;
-    const areaS = Math.sqrt(Math.min(st.frac, 0.5) / 0.5);
-    const angS = st.dev <= 12 ? 1 : clamp(1 - (st.dev - 12) / 36, 0, 1);
-    if (!st.convex || st.frac < minFrac * 0.8 || st.frac > 0.985) continue;
-    const score = areaS * angS * (st.inside ? 1 : 0.55) * (0.12 + 0.88 * support) * (0.6 + 0.4 * Math.min(1, c.ps / Math.max(areaS * angS, 1e-3)));
-    if (!best || score > best.score) best = { Q, score, support, frac: st.frac, tag: c.tag, dev: st.dev };
+    {
+      const ring = Math.max(2, Math.round(0.035 * mx)), rs = [], gs = [], bsa = [];
+      for (let y = 0; y < h; y += 2) for (let x = 0; x < w; x += 2) {
+        if (x < ring || y < ring || x >= w - ring || y >= h - ring) { const j = (y * w + x) * 4; rs.push(d[j]); gs.push(d[j + 1]); bsa.push(d[j + 2]); }
+      }
+      const med = (a) => { const s = Float32Array.from(a).sort(); return s[(s.length / 2) | 0]; };
+      const mr = med(rs), mg = med(gs), mb = med(bsa);
+      const dev = rs.map((v, i) => Math.hypot(v - mr, gs[i] - mg, bsa[i] - mb) / 1.732).sort((a, b) => a - b);
+      const spread = dev[(dev.length * 0.8) | 0];
+      if (spread < 38) {
+        const T = Math.max(20, spread * 2.2 + 8), bg = new Uint8Array(n);
+        for (let i = 0, j = 0; i < n; i++, j += 4) bg[i] = Math.hypot(d[j] - mr, d[j + 1] - mg, d[j + 2] - mb) / 1.732 > T ? 1 : 0;
+        addComponents(bg, 'bgdist', 2);
+      }
+    }
+    {
+      const sat = new Uint8Array(n);
+      for (let i = 0, j = 0; i < n; i++, j += 4) { const a = Math.max(d[j], d[j + 1], d[j + 2]), b = Math.min(d[j], d[j + 1], d[j + 2]); sat[i] = a ? ((a - b) * 255 / a) | 0 : 0; }
+      const ts = otsu(sat);
+      if (ts > 28) {
+        const lo = new Uint8Array(n), hi = new Uint8Array(n);
+        for (let i = 0; i < n; i++) { if (sat[i] > ts) hi[i] = 1; else lo[i] = 1; }
+        addComponents(lo, 'satlow', 1); addComponents(hi, 'sathigh', 1);
+      }
+    }
+    evaluate();
   }
   if (!best) return null;
-  const q = best.Q.map(p => ({ x: clamp((p[0] + 0.5) / w, 0, 1), y: clamp((p[1] + 0.5) / h, 0, 1) }));
+  const q = best.Q.map((p) => ({ x: clamp((p[0] + 0.5) / w, 0, 1), y: clamp((p[1] + 0.5) / h, 0, 1) }));
   return {
-    quad: q, score: best.score, support: best.support, frac: best.frac, tag: best.tag,
-    ok: best.score >= (opt.okScore || 0.30) && best.support >= (opt.okSupport || 0.45)
+    quad: q, score: best.score, support: best.support, contrast: best.contrast, paper: best.paper, frac: best.frac, tag: best.tag, dev: best.dev,
+    aspect: best.aspect, wh: best.wh, kind: best.kind, label: best.label,
+    ok: best.score >= (opt.okScore || 0.45) && best.support >= (opt.okSupport || 0.5)
   };
 }
 
@@ -1102,34 +1373,51 @@ function homography(src, dst) {
   return solveLinear(A, b);
 }
 
-function estimateOutputSize(Q, maxSide) {
+function estimateOutputSize(Q, maxSide, snap) {
   const d = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
   let W = Math.max(d(Q[0], Q[1]), d(Q[3], Q[2])), H = Math.max(d(Q[0], Q[3]), d(Q[1], Q[2]));
+  if (snap && snap.w) {                       // standard paper (A4 / Letter / Legal / ID-1 ...) -> exact ratio instead of a perspective-skewed estimate
+    const s = snapAspect(Q, snap.w, snap.h, W / H);
+    if (s) { if (s >= 1) { W = Math.max(W, H); H = W / s; } else { H = Math.max(W, H); W = H * s; } }
+  }
   const m = Math.max(W, H);
   if (m > maxSide) { const s = maxSide / m; W *= s; H *= s; }
   return [Math.max(16, Math.round(W)), Math.max(16, Math.round(H))];
 }
+/* best estimate of the true width/height of a photographed page: the Zhang-He rectified ratio, snapped to the nearest
+   standard paper (A4 / Letter / Legal / ID-1 ...) when it is that close. returns 0 when the geometry is not trustworthy. */
+function snapAspect(Q, imgW, imgH, edgeRatio) {
+  const a = quadAspect(Q, imgW, imgH);
+  if (!(a.ratio > 0) || (edgeRatio && Math.abs(Math.log(a.ratio / edgeRatio)) > 0.25)) return 0;
+  const L = a.ratio >= 1 ? a.ratio : 1 / a.ratio, c = classifyRatio(L);
+  if (c.kind !== 'free' && c.kind !== 'receipt' && c.err < 0.035) return a.ratio >= 1 ? c.snap : 1 / c.snap;
+  return a.ratio;
+}
 
-/* quad: [[x,y]*4] in source pixels (tl,tr,br,bl) */
-function warpPerspective(src, quad, outW, outH) {
+/* quad: [[x,y]*4] in source pixels (tl,tr,br,bl)
+   warpBand renders output rows [y0,y1) of the outW x outH page. `src` may be a sub-rectangle of the
+   source image whose top-left corner sits at (ox,oy) in full-source coordinates. */
+function warpBand(src, quad, outW, outH, y0, y1, ox, oy) {
+  ox = ox || 0; oy = oy || 0;
+  const rows = Math.max(0, y1 - y0);
   const H = homography([[0, 0], [outW, 0], [outW, outH], [0, outH]], quad);
-  const out = new Uint8ClampedArray(outW * outH * 4);
-  if (!H) return { width: outW, height: outH, data: out };
+  const out = new Uint8ClampedArray(outW * rows * 4);
+  if (!H) return { width: outW, height: rows, data: out };
   const sw = src.width, sh = src.height, sd = src.data;
   const [a, b, c, d, e, f, g, hh] = H;
   const maxX = sw - 1, maxY = sh - 1;
   let o = 0;
-  for (let y = 0; y < outH; y++) {
+  for (let y = y0; y < y1; y++) {
     const yy = y + 0.5;
     let nx = a * 0.5 + b * yy + c, ny = d * 0.5 + e * yy + f, dn = g * 0.5 + hh * yy + 1;
     for (let x = 0; x < outW; x++, o += 4, nx += a, ny += d, dn += g) {
       const inv = 1 / dn;
-      let sx = nx * inv - 0.5, sy = ny * inv - 0.5;
+      let sx = nx * inv - 0.5 - ox, sy = ny * inv - 0.5 - oy;
       if (sx < 0) sx = 0; else if (sx > maxX) sx = maxX;
       if (sy < 0) sy = 0; else if (sy > maxY) sy = maxY;
-      const x0 = sx | 0, y0 = sy | 0, x1 = x0 < maxX ? x0 + 1 : x0, y1 = y0 < maxY ? y0 + 1 : y0;
-      const fx = sx - x0, fy = sy - y0;
-      const i00 = (y0 * sw + x0) * 4, i10 = (y0 * sw + x1) * 4, i01 = (y1 * sw + x0) * 4, i11 = (y1 * sw + x1) * 4;
+      const x0 = sx | 0, y0i = sy | 0, x1 = x0 < maxX ? x0 + 1 : x0, y1i = y0i < maxY ? y0i + 1 : y0i;
+      const fx = sx - x0, fy = sy - y0i;
+      const i00 = (y0i * sw + x0) * 4, i10 = (y0i * sw + x1) * 4, i01 = (y1i * sw + x0) * 4, i11 = (y1i * sw + x1) * 4;
       const w00 = (1 - fx) * (1 - fy), w10 = fx * (1 - fy), w01 = (1 - fx) * fy, w11 = fx * fy;
       out[o] = sd[i00] * w00 + sd[i10] * w10 + sd[i01] * w01 + sd[i11] * w11;
       out[o + 1] = sd[i00 + 1] * w00 + sd[i10 + 1] * w10 + sd[i01 + 1] * w01 + sd[i11 + 1] * w11;
@@ -1137,7 +1425,24 @@ function warpPerspective(src, quad, outW, outH) {
       out[o + 3] = 255;
     }
   }
-  return { width: outW, height: outH, data: out };
+  return { width: outW, height: rows, data: out };
+}
+function warpPerspective(src, quad, outW, outH) { return warpBand(src, quad, outW, outH, 0, outH, 0, 0); }
+
+/* bounding rectangle (in source pixels) needed to render output rows [ya,yb) */
+function bandSourceRect(quad, outW, outH, ya, yb, srcW, srcH, pad) {
+  pad = pad == null ? 3 : pad;
+  const H = homography([[0, 0], [outW, 0], [outW, outH], [0, outH]], quad);
+  if (!H) return { x: 0, y: 0, w: srcW, h: srcH };
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  [[0, ya], [outW, ya], [outW, yb], [0, yb]].forEach((p) => {
+    const dn = H[6] * p[0] + H[7] * p[1] + 1;
+    const X = (H[0] * p[0] + H[1] * p[1] + H[2]) / dn, Y = (H[3] * p[0] + H[4] * p[1] + H[5]) / dn;
+    if (X < minX) minX = X; if (X > maxX) maxX = X; if (Y < minY) minY = Y; if (Y > maxY) maxY = Y;
+  });
+  const x0 = Math.max(0, Math.floor(minX) - pad), y0 = Math.max(0, Math.floor(minY) - pad);
+  const x1 = Math.min(srcW, Math.ceil(maxX) + pad + 1), y1 = Math.min(srcH, Math.ceil(maxY) + pad + 1);
+  return { x: x0, y: y0, w: Math.max(1, x1 - x0), h: Math.max(1, y1 - y0) };
 }
 
 /* ------------------------------------------------------------------ filters */
@@ -1213,7 +1518,8 @@ function interpTables(w, cell, sw) {
   return { x0, x1, fx };
 }
 
-const FILTERS = ['original', 'magic', 'bw', 'gray', 'lighten'];
+const FILTERS = ['original', 'magic', 'vivid', 'lighten', 'gray', 'bw'];
+const needsBg = (f) => f === 'magic' || f === 'vivid' || f === 'gray' || f === 'bw';
 
 function buildCurveLUT(bright, contrast) {
   const lut = new Uint8ClampedArray(256);
@@ -1238,15 +1544,64 @@ function autoLevelsRange(d) {
   return [lo, hi];
 }
 
+/* ---- separable box blur (running sums, clamped edges) ---- */
+function boxBlurH(src, dst, w, h, R) {
+  const div = 1 / (2 * R + 1);
+  for (let y = 0; y < h; y++) {
+    const row = y * w;
+    let acc = 0;
+    for (let k = -R; k <= R; k++) acc += src[row + (k < 0 ? 0 : k >= w ? w - 1 : k)];
+    for (let x = 0; x < w; x++) {
+      dst[row + x] = acc * div;
+      const a = x + R + 1, b = x - R;
+      acc += src[row + (a >= w ? w - 1 : a)] - src[row + (b < 0 ? 0 : b)];
+    }
+  }
+}
+function boxBlurV(src, dst, w, h, R) {
+  const div = 1 / (2 * R + 1), acc = new Float32Array(w);
+  for (let k = -R; k <= R; k++) { const r = (k < 0 ? 0 : k >= h ? h - 1 : k) * w; for (let x = 0; x < w; x++) acc[x] += src[r + x]; }
+  for (let y = 0; y < h; y++) {
+    const o = y * w;
+    for (let x = 0; x < w; x++) dst[o + x] = acc[x] * div;
+    const a = (y + R + 1 >= h ? h - 1 : y + R + 1) * w, b = (y - R < 0 ? 0 : y - R) * w;
+    for (let x = 0; x < w; x++) acc[x] += src[a + x] - src[b + x];
+  }
+}
+
+/* luminance unsharp mask: sharpens edges without colour fringes; a soft threshold keeps paper grain/noise quiet.
+   Needs ~4*R rows of context above/below when used on bands (see SHARP_HALO). */
+const SHARP_HALO = 6;
+function unsharpLuma(img, amount, R) {
+  const w = img.width, h = img.height, d = img.data, n = w * h;
+  R = R || 1;
+  const L = new Float32Array(n);
+  for (let i = 0, j = 0; i < n; i++, j += 4) L[i] = (d[j] * 77 + d[j + 1] * 150 + d[j + 2] * 29) / 256;
+  let A = Float32Array.from(L), B = new Float32Array(n);
+  for (let it = 0; it < 2; it++) { boxBlurH(A, B, w, h, R); boxBlurV(B, A, w, h, R); }
+  const thr = 2.5;
+  for (let i = 0, j = 0; i < n; i++, j += 4) {
+    const diff = L[i] - A[i], ad = diff < 0 ? -diff : diff;
+    const dl = diff * amount * (ad / (ad + thr));
+    d[j] += dl; d[j + 1] += dl; d[j + 2] += dl;
+  }
+}
+/* sharpening radius (box radius, 2 passes) suited to the output resolution */
+const sharpRadius = (longEdge) => (longEdge >= 5000 ? 2 : 1);
+
 /**
  * applyFilter(img, opts, bgCache) — modifies img.data in place and returns img.
- * opts: { filter, bright, contrast, sharp, bwLevel }
+ * opts: { filter, bright, contrast, sharp, bwLevel, sat, crisp, levels, yOff }
+ *   sat   : -100..100 colour saturation
+ *   crisp : 0|1 automatic print sharpening
+ *   levels: [lo,hi] precomputed auto-levels for 'lighten' (when img is only a band of the page)
+ *   yOff  : row offset of img inside the full page (for background interpolation on bands)
  */
 function applyFilter(img, o, bgCache) {
   o = o || {};
   const w = img.width, h = img.height, d = img.data, f = o.filter || 'original';
-  const n = w * h;
-  if (f === 'magic' || f === 'gray' || f === 'bw') {
+  const n = w * h, yOff = o.yOff || 0;
+  if (needsBg(f)) {
     const B = bgCache || estimateBackground(img);
     const { x0, x1, fx } = interpTables(w, B.cell, B.sw);
     const bg = B.bg, sw = B.sw, sh = B.sh;
@@ -1260,25 +1615,27 @@ function applyFilter(img, o, bgCache) {
       }
     }
     const lo = 0.12, hi = 0.93, inv = 1 / (hi - lo);
+    const vivid = f === 'vivid', curve = vivid ? 0.55 : 0.35, satK = vivid ? 1.6 : 1.18;
+    const colour = f === 'magic' || vivid;
     for (let y = 0; y < h; y++) {
-      let gy = (y + 0.5) / B.cell - 0.5;
+      let gy = (y + yOff + 0.5) / B.cell - 0.5;
       if (gy < 0) gy = 0; if (gy > sh - 1) gy = sh - 1;
       const y0 = gy | 0, y1 = Math.min(sh - 1, y0 + 1), fy = gy - y0;
       const r0 = y0 * sw, r1 = y1 * sw;
       for (let x = 0; x < w; x++) {
-        const xa = x0[x] , xb = x1[x], fxx = fx[x];
+        const xa = x0[x], xb = x1[x], fxx = fx[x];
         const a = (r0 + xa) * 3, b = (r0 + xb) * 3, c = (r1 + xa) * 3, e = (r1 + xb) * 3;
         const w00 = (1 - fxx) * (1 - fy), w10 = fxx * (1 - fy), w01 = (1 - fxx) * fy, w11 = fxx * fy;
         const bR = bg[a] * w00 + bg[b] * w10 + bg[c] * w01 + bg[e] * w11;
         const bG = bg[a + 1] * w00 + bg[b + 1] * w10 + bg[c + 1] * w01 + bg[e + 1] * w11;
         const bB = bg[a + 2] * w00 + bg[b + 2] * w10 + bg[c + 2] * w01 + bg[e + 2] * w11;
         const i = (y * w + x) * 4;
-        if (f === 'magic') {
+        if (colour) {
           let r = (d[i] / bR - lo) * inv, g = (d[i + 1] / bG - lo) * inv, bl = (d[i + 2] / bB - lo) * inv;
           r = r < 0 ? 0 : r > 1 ? 1 : r; g = g < 0 ? 0 : g > 1 ? 1 : g; bl = bl < 0 ? 0 : bl > 1 ? 1 : bl;
-          r += 0.35 * (r * r * (3 - 2 * r) - r); g += 0.35 * (g * g * (3 - 2 * g) - g); bl += 0.35 * (bl * bl * (3 - 2 * bl) - bl);
+          r += curve * (r * r * (3 - 2 * r) - r); g += curve * (g * g * (3 - 2 * g) - g); bl += curve * (bl * bl * (3 - 2 * bl) - bl);
           const L = 0.299 * r + 0.587 * g + 0.114 * bl;
-          r = L + (r - L) * 1.18; g = L + (g - L) * 1.18; bl = L + (bl - L) * 1.18;
+          r = L + (r - L) * satK; g = L + (g - L) * satK; bl = L + (bl - L) * satK;
           d[i] = r * 255; d[i + 1] = g * 255; d[i + 2] = bl * 255;
         } else {
           const Y = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
@@ -1298,7 +1655,7 @@ function applyFilter(img, o, bgCache) {
       }
     }
   } else if (f === 'lighten') {
-    const [lo, hi] = autoLevelsRange(d);
+    const [lo, hi] = o.levels || autoLevelsRange(d);
     const lut = new Uint8ClampedArray(256), span = Math.max(1, hi - lo);
     for (let i = 0; i < 256; i++) { const t = clamp((i - lo) / span, 0, 1); lut[i] = Math.pow(t, 0.82) * 255; }
     for (let i = 0; i < n * 4; i += 4) {
@@ -1313,25 +1670,204 @@ function applyFilter(img, o, bgCache) {
     for (let i = 0; i < n * 4; i += 4) { d[i] = lut[d[i]]; d[i + 1] = lut[d[i + 1]]; d[i + 2] = lut[d[i + 2]]; }
   }
 
-  if (o.sharp > 0) {
-    const a = (o.sharp / 100) * 0.6;
-    const src = new Uint8ClampedArray(d);
-    const k0 = 1 + 4 * a;
-    for (let y = 1; y < h - 1; y++) {
-      for (let x = 1; x < w - 1; x++) {
-        const i = (y * w + x) * 4;
-        for (let c = 0; c < 3; c++) {
-          const j = i + c;
-          d[j] = k0 * src[j] - a * (src[j - 4] + src[j + 4] + src[j - w * 4] + src[j + w * 4]);
-        }
-      }
+  if (o.sat && f !== 'gray' && f !== 'bw') {
+    const k = 1 + clamp(o.sat, -100, 100) / 100;
+    for (let i = 0; i < n * 4; i += 4) {
+      const L = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+      d[i] = L + (d[i] - L) * k; d[i + 1] = L + (d[i + 1] - L) * k; d[i + 2] = L + (d[i + 2] - L) * k;
     }
   }
+
+  const amt = (o.crisp ? 0.8 : 0) + (o.sharp > 0 ? (o.sharp / 100) * 1.1 : 0);
+  if (amt > 0 && w > 4 && h > 4) unsharpLuma(img, amt, o.sharpR || sharpRadius(o.fullLong || Math.max(w, h)));
   return img;
 }
 
+/* one horizontal band of the final page: warp + filter. job = {quad,outW,outH,ya,yb,ox,oy,fopts,bg} */
+function renderBand(srcBand, job) {
+  const img = warpBand(srcBand, job.quad, job.outW, job.outH, job.ya, job.yb, job.ox, job.oy);
+  applyFilter(img, Object.assign({}, job.fopts, { yOff: job.ya }), job.bg || null);
+  return img;
+}
+
+/* ------------------------------------------------------------------ QR code (byte mode, EC level M, versions 1-10) + PromptPay */
+const QR_M = { // version -> [ecc codewords per block, [blocks, dataCodewords], [blocks2, dataCodewords2]]
+  1: [10, [1, 16]], 2: [16, [1, 28]], 3: [26, [1, 44]], 4: [18, [2, 32]], 5: [24, [2, 43]],
+  6: [16, [4, 27]], 7: [18, [4, 31]], 8: [22, [2, 38], [2, 39]], 9: [22, [3, 36], [2, 37]], 10: [26, [4, 43], [1, 44]]
+};
+const QR_ALIGN = { 1: [], 2: [6, 18], 3: [6, 22], 4: [6, 26], 5: [6, 30], 6: [6, 34], 7: [6, 22, 38], 8: [6, 24, 42], 9: [6, 26, 46], 10: [6, 28, 50] };
+const GF_EXP = new Uint8Array(512), GF_LOG = new Uint8Array(256);
+(() => { let x = 1; for (let i = 0; i < 255; i++) { GF_EXP[i] = x; GF_LOG[x] = i; x <<= 1; if (x & 256) x ^= 0x11d; } for (let i = 255; i < 512; i++) GF_EXP[i] = GF_EXP[i - 255]; })();
+const gfMul = (a, b) => (a && b ? GF_EXP[GF_LOG[a] + GF_LOG[b]] : 0);
+function rsGenerator(deg) {
+  let g = [1];
+  for (let i = 0; i < deg; i++) {
+    const ng = new Array(g.length + 1).fill(0);
+    for (let j = 0; j < g.length; j++) { ng[j] ^= g[j]; ng[j + 1] ^= gfMul(g[j], GF_EXP[i]); }
+    g = ng;
+  }
+  return g;
+}
+function rsEncode(data, deg) {
+  const g = rsGenerator(deg), res = new Array(deg).fill(0);
+  for (const b of data) {
+    const f = b ^ res.shift();
+    res.push(0);
+    if (f) for (let i = 0; i < deg; i++) res[i] ^= gfMul(g[i + 1], f);
+  }
+  return res;
+}
+function qrCapacity(v) { const e = QR_M[v]; let n = e[1][0] * e[1][1]; if (e[2]) n += e[2][0] * e[2][1]; return n; }
+
+/* returns array of Uint8Array rows (1 = dark module) */
+function qrEncode(text) {
+  const bytes = Array.from(new TextEncoder().encode(text));
+  let ver = 0;
+  for (let v = 1; v <= 10; v++) { if (bytes.length + 2 <= qrCapacity(v)) { ver = v; break; } }
+  if (!ver) throw new Error('QR: text too long');
+  const size = 17 + 4 * ver, total = qrCapacity(ver);
+  // --- data bits
+  const bits = [];
+  const put = (val, len) => { for (let i = len - 1; i >= 0; i--) bits.push((val >>> i) & 1); };
+  put(4, 4); put(bytes.length, ver < 10 ? 8 : 16);
+  bytes.forEach((b) => put(b, 8));
+  const cap = total * 8;
+  for (let i = 0; i < 4 && bits.length < cap; i++) bits.push(0);
+  while (bits.length % 8) bits.push(0);
+  const cw = [];
+  for (let i = 0; i < bits.length; i += 8) { let b = 0; for (let k = 0; k < 8; k++) b = (b << 1) | bits[i + k]; cw.push(b); }
+  for (let pad = 0xec; cw.length < total; pad ^= 0xec ^ 0x11) cw.push(pad);
+  // --- blocks + error correction
+  const [eccLen, g1, g2] = QR_M[ver];
+  const blocks = [];
+  let pos = 0;
+  [g1, g2].forEach((g) => { if (!g) return; for (let i = 0; i < g[0]; i++) { const d = cw.slice(pos, pos + g[1]); pos += g[1]; blocks.push({ d, e: rsEncode(d, eccLen) }); } });
+  const final = [];
+  const maxD = Math.max(...blocks.map((b) => b.d.length));
+  for (let i = 0; i < maxD; i++) blocks.forEach((b) => { if (i < b.d.length) final.push(b.d[i]); });
+  for (let i = 0; i < eccLen; i++) blocks.forEach((b) => final.push(b.e[i]));
+  // --- matrix
+  const M = Array.from({ length: size }, () => new Int8Array(size).fill(-1)); // -1 free, 0/1 set
+  const fn = Array.from({ length: size }, () => new Uint8Array(size));       // function-pattern mask
+  const setF = (x, y, v) => { if (x >= 0 && y >= 0 && x < size && y < size) { M[y][x] = v; fn[y][x] = 1; } };
+  // finder patterns: ring pattern 7x7 (dark border, light ring, dark 3x3 centre) + separator
+  const drawFinder = (cx, cy) => {
+    for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) {
+      const m = Math.max(Math.abs(dx), Math.abs(dy));
+      setF(cx + dx, cy + dy, m === 3 || m <= 1 ? 1 : 0);
+    }
+  };
+  drawFinder(3, 3); drawFinder(size - 4, 3); drawFinder(3, size - 4);
+  for (let i = 0; i < size; i++) { if (!fn[6][i]) setF(i, 6, i % 2 === 0 ? 1 : 0); if (!fn[i][6]) setF(6, i, i % 2 === 0 ? 1 : 0); }
+  const al = QR_ALIGN[ver];
+  for (const ay of al) for (const ax of al) {
+    if ((ax === 6 && ay === 6) || (ax === 6 && ay === al[al.length - 1]) || (ax === al[al.length - 1] && ay === 6)) continue;
+    for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) setF(ax + dx, ay + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1 ? 1 : 0);
+  }
+  setF(8, size - 8, 1); // dark module
+  for (let i = 0; i < 9; i++) { if (!fn[8][i]) setF(i, 8, 0); if (!fn[i][8]) setF(8, i, 0); }
+  for (let i = 0; i < 8; i++) { setF(size - 1 - i, 8, 0); if (i) setF(8, size - 1 - i, 0); }
+  if (ver >= 7) {
+    let rem = ver; for (let i = 0; i < 12; i++) rem = (rem << 1) ^ ((rem >>> 11) * 0x1f25);
+    const vb = (ver << 12) | rem;
+    for (let i = 0; i < 18; i++) { const bit = (vb >>> i) & 1, a = size - 11 + (i % 3), b = (i / 3) | 0; setF(a, b, bit); setF(b, a, bit); }
+  }
+  // --- place data (zig-zag)
+  const dataBits = [];
+  final.forEach((b) => { for (let i = 7; i >= 0; i--) dataBits.push((b >>> i) & 1); });
+  const place = (mask) => {
+    const out = M.map((r) => Int8Array.from(r));
+    let k = 0, up = true;
+    for (let x = size - 1; x > 0; x -= 2) {
+      if (x === 6) x--;
+      for (let i = 0; i < size; i++) {
+        const y = up ? size - 1 - i : i;
+        for (let c = 0; c < 2; c++) {
+          const xx = x - c;
+          if (fn[y][xx]) continue;
+          let bit = k < dataBits.length ? dataBits[k] : 0; k++;
+          const mk = [(xx + y) % 2 === 0, y % 2 === 0, xx % 3 === 0, (xx + y) % 3 === 0, (((y / 2) | 0) + ((xx / 3) | 0)) % 2 === 0, ((xx * y) % 2) + ((xx * y) % 3) === 0, ((((xx * y) % 2) + ((xx * y) % 3)) % 2) === 0, ((((xx + y) % 2) + ((xx * y) % 3)) % 2) === 0][mask];
+          out[y][xx] = bit ^ (mk ? 1 : 0);
+        }
+      }
+      up = !up;
+    }
+    return out;
+  };
+  const formatBits = (mask) => { // EC level M = 00
+    let data = (0 << 3) | mask, rem = data;
+    for (let i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
+    return ((data << 10) | rem) ^ 0x5412;
+  };
+  const drawFormat = (m, mask) => {
+    const fb = formatBits(mask);
+    const bit = (i) => (fb >>> i) & 1;
+    for (let i = 0; i <= 5; i++) m[i][8] = bit(i);           // column 8, rows 0..5
+    m[7][8] = bit(6); m[8][8] = bit(7); m[8][7] = bit(8);
+    for (let i = 9; i < 15; i++) m[8][14 - i] = bit(i);
+    for (let i = 0; i < 8; i++) m[8][size - 1 - i] = bit(i);
+    for (let i = 8; i < 15; i++) m[size - 15 + i][8] = bit(i);
+    m[size - 8][8] = 1;
+  };
+  const penalty = (m) => {
+    let p = 0;
+    for (let pass = 0; pass < 2; pass++) {
+      for (let a = 0; a < size; a++) {
+        let run = 1;
+        for (let b = 1; b < size; b++) {
+          const cur = pass ? m[b][a] : m[a][b], prev = pass ? m[b - 1][a] : m[a][b - 1];
+          if (cur === prev) { run++; if (run === 5) p += 3; else if (run > 5) p++; } else run = 1;
+        }
+      }
+    }
+    for (let y = 0; y < size - 1; y++) for (let x = 0; x < size - 1; x++) { const c = m[y][x]; if (c === m[y][x + 1] && c === m[y + 1][x] && c === m[y + 1][x + 1]) p += 3; }
+    const pat = [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0], pat2 = pat.slice().reverse();
+    for (let y = 0; y < size; y++) for (let x = 0; x <= size - 11; x++) {
+      let a = true, b = true, c = true, d = true;
+      for (let k = 0; k < 11; k++) { if (m[y][x + k] !== pat[k]) a = false; if (m[y][x + k] !== pat2[k]) b = false; if (m[x + k][y] !== pat[k]) c = false; if (m[x + k][y] !== pat2[k]) d = false; }
+      if (a) p += 40; if (b) p += 40; if (c) p += 40; if (d) p += 40;
+    }
+    let dark = 0; for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) dark += m[y][x];
+    p += Math.floor(Math.abs(dark * 20 - size * size * 10) / (size * size)) * 10;
+    return p;
+  };
+  let best = null, bestP = Infinity;
+  for (let mask = 0; mask < 8; mask++) {
+    const m = place(mask); drawFormat(m, mask);
+    const pn = penalty(m);
+    if (pn < bestP) { bestP = pn; best = m; }
+  }
+  return best.map((r) => Uint8Array.from(r, (v) => (v === 1 ? 1 : 0)));
+}
+
+function crc16ccitt(str) {
+  let crc = 0xffff;
+  for (let i = 0; i < str.length; i++) {
+    crc ^= str.charCodeAt(i) << 8;
+    for (let k = 0; k < 8; k++) crc = crc & 0x8000 ? ((crc << 1) ^ 0x1021) & 0xffff : (crc << 1) & 0xffff;
+  }
+  return crc.toString(16).toUpperCase().padStart(4, '0');
+}
+/* PromptPay (Thai QR payment) payload for a mobile number / national ID, optional amount in baht */
+function promptPayPayload(id, amount) {
+  id = String(id).replace(/\D/g, '');
+  const tlv = (tag, val) => tag + String(val.length).padStart(2, '0') + val;
+  let target, sub;
+  if (id.length >= 13) { sub = '02'; target = id; }                                  // national ID / tax ID
+  else { sub = '01'; target = '0066' + id.replace(/^0/, ''); }                       // mobile number
+  const hasAmt = amount != null && amount > 0;
+  let p = tlv('00', '01') + tlv('01', hasAmt ? '12' : '11');
+  p += tlv('29', tlv('00', 'A000000677010111') + tlv(sub, target));
+  p += tlv('53', '764');
+  if (hasAmt) p += tlv('54', (Math.round(amount * 100) / 100).toFixed(2));
+  p += tlv('58', 'TH');
+  p += '6304';
+  return p + crc16ccitt(p);
+}
+
 /* ------------------------------------------------------------------ PDF writer */
-const PAGE_SIZES = { a4: [595.28, 841.89], letter: [612, 792], a5: [419.53, 595.28] };
+const PAGE_SIZES = { a4: [595.28, 841.89], letter: [612, 792], a5: [419.53, 595.28], legal: [612, 1008], card: [153.07, 242.65] };
+const AUTO_PAGE = { a: 'a4', letter: 'letter', legal: 'legal', card: 'card' };
 
 function buildPDF(pages, opt) {
   opt = opt || {};
@@ -1359,15 +1895,21 @@ function buildPDF(pages, opt) {
   const p2 = (v) => String(v).padStart(2, '0');
   const dstr = `D:${now.getUTCFullYear()}${p2(now.getUTCMonth() + 1)}${p2(now.getUTCDate())}${p2(now.getUTCHours())}${p2(now.getUTCMinutes())}${p2(now.getUTCSeconds())}Z`;
   begin(3);
-  push(`<< /Title <${hexUtf16(opt.title || 'Scan')}> /Creator (FlowScan) /Producer (FlowScan) /CreationDate (${dstr}) >>\nendobj\n`);
+  push(`<< /Title <${hexUtf16(opt.title || 'Scan')}> /Creator (KT-Scan) /Producer (KT-Scan) /CreationDate (${dstr}) >>\nendobj\n`);
 
   const margin = opt.margin || 0;
   pages.forEach((pg, i) => {
     let pw, ph, dw, dh, dx, dy;
-    if (!opt.size || opt.size === 'fit') {
-      pw = pg.w * 0.48; ph = pg.h * 0.48; dw = pw; dh = ph; dx = 0; dy = 0;
+    let sizeKey = opt.size;
+    if (sizeKey === 'auto') {                                         // page size follows the paper that was scanned
+      const kind = classifyRatio(Math.max(pg.w, pg.h) / Math.min(pg.w, pg.h)).kind;
+      sizeKey = AUTO_PAGE[kind] || 'fit';
+    }
+    if (!sizeKey || sizeKey === 'fit') {
+      const sc = opt.size === 'auto' ? Math.min(0.48, 841.89 / Math.max(pg.w, pg.h)) : 0.48;
+      pw = pg.w * sc; ph = pg.h * sc; dw = pw; dh = ph; dx = 0; dy = 0;
     } else {
-      let [bw, bh] = PAGE_SIZES[opt.size] || PAGE_SIZES.a4;
+      let [bw, bh] = PAGE_SIZES[sizeKey] || PAGE_SIZES.a4;
       if (pg.w > pg.h * 1.08) [bw, bh] = [bh, bw];
       pw = bw; ph = bh;
       const aw = pw - 2 * margin, ah = ph - 2 * margin;
@@ -1453,11 +1995,12 @@ function buildZip(files, date) {
 }
 
 return {
-  detectDocument, warpPerspective, homography, estimateOutputSize,
-  estimateBackground, applyFilter, FILTERS,
-  buildPDF, buildZip, crc32, PAGE_SIZES,
+  _dbg: { grayFromRGBA, boxBlur3, sobel, interiorStats }, detectDocument, quadAspect, classifyRatio, warpPerspective, warpBand, bandSourceRect, renderBand, homography, estimateOutputSize,
+  estimateBackground, applyFilter, autoLevelsRange, needsBg, unsharpLuma, sharpRadius, SHARP_HALO, FILTERS,
+  buildPDF, buildZip, crc32, PAGE_SIZES, snapAspect,
   blockGray, meanAbsDiff,
   isConvexQuad, orderQuad, polyArea, convexHull, hullToQuad, quadAngleDev,
+  qrEncode, crc16ccitt, promptPayPayload,
   clamp
 };
 })();
@@ -1472,7 +2015,7 @@ return {
    ==================================================================== */
 const I18N = {
   th: {
-    'app.title': 'FlowScan — สแกนเอกสารต่อเนื่อง',
+    'app.title': 'KT-Scan — สแกนเอกสารต่อเนื่อง',
     settings: 'ตั้งค่า', close: 'ปิด', back: 'ย้อนกลับ', more: 'เพิ่มเติม', cancel: 'ยกเลิก', ok: 'ตกลง', delete: 'ลบ',
     page: 'หน้า', pages: '{0} หน้า',
     'home.scan': 'สแกน', 'home.import': 'นำเข้ารูป',
@@ -1495,6 +2038,7 @@ const I18N = {
     'cam.hintHold': 'ถือนิ่ง ๆ กำลังถ่าย…', 'cam.hintSteady': 'พบเอกสาร — ถือให้นิ่ง', 'cam.hintLow': 'เห็นขอบไม่ชัด — ขยับให้เห็นครบทั้งใบ',
     'cam.hintNext': 'บันทึกแล้ว ✓ พลิกไปหน้าที่ {0}', 'cam.hintBack': 'ถ่ายด้านหลังบัตร',
     'cam.hintManual': 'กดปุ่มชัตเตอร์เพื่อถ่าย', 'cam.hintManualOk': 'พบเอกสาร — กดชัตเตอร์',
+    'cam.hintFound': 'พบ {0} — ถือให้นิ่ง', 'cam.hintManualFound': 'พบ {0} — กดชัตเตอร์', 'cam.hintCloser': 'เอกสารเล็กไป — ขยับเข้าใกล้อีกนิด', 'fmt.card': 'บัตร', 'fmt.receipt': 'ใบเสร็จ',
     'cam.pageSaved': 'บันทึกหน้าที่ {0} แล้ว', 'cam.dup': 'หน้าซ้ำ — ข้ามให้แล้ว', 'cam.idFrontDone': 'ด้านหน้าเรียบร้อย — ถ่ายด้านหลัง',
     'cam.noTorch': 'อุปกรณ์นี้เปิดไฟฉายไม่ได้',
     'cam.retry': 'ลองอีกครั้ง', 'cam.native': 'ถ่ายด้วยกล้องระบบ', 'cam.importBtn': 'เลือกรูป',
@@ -1512,8 +2056,24 @@ const I18N = {
     'ed.applyAll': 'ใช้กับทุกหน้า', 'ed.applyAllTitle': 'ใช้กับทุกหน้า', 'ed.applyAllText': 'ใช้ฟิลเตอร์และการปรับแต่งนี้กับทั้ง {0} หน้า?', 'ed.applied': 'ใช้กับทุกหน้าแล้ว',
     'ed.menuTitle': 'หน้านี้', 'ed.deletePage': 'ลบหน้านี้', 'ed.deleteText': 'ลบหน้านี้ถาวร?',
     'filter.original': 'ต้นฉบับ', 'filter.magic': 'สีอัตโนมัติ', 'filter.bw': 'ขาวดำ', 'filter.gray': 'ไล่เฉดเทา', 'filter.lighten': 'สว่างใส',
-    'export.title': 'ส่งออกเอกสาร', 'export.name': 'ชื่อไฟล์', 'export.format': 'รูปแบบ', 'export.pageSize': 'ขนาดกระดาษ (PDF)', 'export.fit': 'ตามขนาดภาพ',
-    'export.quality': 'คุณภาพ', 'export.qSmall': 'ไฟล์เล็ก (ส่งเร็ว)', 'export.qStd': 'มาตรฐาน', 'export.qHigh': 'สูง (พิมพ์ได้คมชัด)',
+    'filter.vivid': 'สีสด',
+    'filterD.original': 'ไม่ปรับแต่ง', 'filterD.magic': 'พื้นขาว ตัวอักษรชัด สีสมจริง', 'filterD.vivid': 'สีเข้ม สดใส (ภาพ/แผนภูมิ)', 'filterD.lighten': 'สว่างใส คงโทนเดิม', 'filterD.gray': 'เฉดสีเทา', 'filterD.bw': 'ขาวดำสนิท เหมาะกับข้อความ',
+    'ed.sat': 'ความอิ่มสี',
+    'cam.colorMode': 'โหมดสี', 'cam.colorSet': 'โหมดสี: {0}', 'cam.hd': 'ถ่ายด้วยกล้องเครื่อง (ละเอียดสูงสุด)',
+    'st.res4k': '4K (แนะนำ)', 'st.resMax': 'สูงสุดที่กล้องรองรับ', 'st.capOrig': 'ไม่ย่อ (ต้นฉบับ)',
+    'st.crisp': 'เพิ่มความคมชัดอัตโนมัติ', 'st.crispD': 'เก็บขอบตัวอักษรให้คมสำหรับงานพิมพ์',
+    'export.qPrint': 'พิมพ์ 8K · 600 dpi (คมที่สุด)', 'export.qNote': 'ความคมจริงขึ้นกับความละเอียดกล้อง — แอปไม่ขยายภาพปลอมเกินต้นฉบับ ไฟล์ 600 dpi ใหญ่และใช้เวลาเรนเดอร์นานกว่า',
+    'busy.renderHi': 'กำลังเรนเดอร์หน้า {0}/{1} · {2}', 'export.doneRes': 'ส่งออกเรียบร้อย · {0}', 'export.lowered': 'เครื่องนี้รองรับสูงสุด {0} (ลดความละเอียดให้อัตโนมัติ)',
+    'st.donate': 'สนับสนุนทีมพัฒนา', 'st.donateD': 'โดเนทผ่านพร้อมเพย์ ขั้นต่ำ 10 บาท',
+    'donate.title': 'สนับสนุนทีมพัฒนา', 'donate.btn': 'โดเนท',
+    'donate.intro': 'KT-Scan ใช้ฟรี ไม่มีโฆษณา หากแอปนี้เป็นประโยชน์ ร่วมสนับสนุนทีมพัฒนาได้ตามกำลังใจ (ขั้นต่ำ 10 บาท)',
+    'donate.amount': 'จำนวนเงิน (บาท)', 'donate.custom': 'หรือระบุจำนวนเอง', 'donate.min': 'ขั้นต่ำ 10 บาท', 'donate.max': 'สูงสุด 100,000 บาทต่อครั้ง', 'donate.bad': 'กรุณาใส่จำนวนเงินเป็นตัวเลข',
+    'donate.to': 'พร้อมเพย์ (เบอร์มือถือ)', 'donate.copy': 'คัดลอกเลข', 'donate.copied': 'คัดลอกเลขพร้อมเพย์แล้ว',
+    'donate.save': 'บันทึก QR', 'donate.saved': 'บันทึกรูป QR แล้ว', 'donate.done': 'โอนแล้ว',
+    'donate.thanks': 'ขอบคุณที่สนับสนุนทีมพัฒนา KT-Scan ❤',
+    'donate.note': 'สแกน QR ด้วยแอปธนาคาร ยอดเงินจะถูกใส่ให้อัตโนมัติ — โปรดตรวจชื่อผู้รับในแอปธนาคารก่อนยืนยัน แอปนี้ไม่เก็บข้อมูลการโอนใด ๆ',
+    'export.title': 'ส่งออกเอกสาร', 'export.name': 'ชื่อไฟล์', 'export.format': 'รูปแบบ', 'export.pageSize': 'ขนาดกระดาษ (PDF)', 'export.fit': 'ตามขนาดภาพ', 'export.auto': 'อัตโนมัติ (ตามกระดาษที่สแกน)', 'st.snap': 'ปรับสัดส่วนตามกระดาษมาตรฐาน', 'st.snapD': 'ถ้าเอกสารเป็น A4 / Letter / บัตร ฯลฯ จะปรับสัดส่วนให้ตรง ลดภาพบิดจากมุมเอียง',
+    'export.quality': 'คุณภาพ', 'export.qSmall': 'ไฟล์เล็ก (ส่งเร็ว)', 'export.qStd': 'มาตรฐาน', 'export.qHigh': 'สูง · 300 dpi (พิมพ์ A4)',
     'export.pages': 'หน้าที่ส่งออก', 'export.all': 'ทั้งหมด ({0})', 'export.selected': 'ที่เลือก ({0})', 'export.info': '{0} หน้า',
     'export.print': 'พิมพ์', 'export.share': 'แชร์', 'export.download': 'ดาวน์โหลด', 'export.done': 'ส่งออกเรียบร้อย',
     'ocr.title': 'แปลงเป็นข้อความ (OCR)', 'ocr.menu': 'แปลงหน้านี้เป็นข้อความ (OCR)', 'ocr.menuAll': 'แปลงทั้งเอกสารเป็นข้อความ (OCR)', 'ocr.lang': 'ภาษาในเอกสาร',
@@ -1523,11 +2083,11 @@ const I18N = {
     'ocr.err': 'ใช้งาน OCR ไม่ได้ (ต้องต่ออินเทอร์เน็ตเพื่อโหลดข้อมูลภาษา)', 'ocr.copied': 'คัดลอกแล้ว',
     'st.lang': 'ภาษา', 'st.theme': 'ธีม', 'st.themeAuto': 'ตามระบบ', 'st.themeLight': 'สว่าง', 'st.themeDark': 'มืด',
     'st.hold': 'ความเร็วถ่ายอัตโนมัติ', 'st.holdD': 'เวลาที่ต้องถือนิ่งก่อนถ่าย', 'st.holdFast': 'เร็ว (0.6 วิ)', 'st.holdNormal': 'ปกติ (1 วิ)', 'st.holdSlow': 'ช้า (1.6 วิ)', 'st.holdVerySlow': 'ช้ามาก (2.4 วิ)',
-    'st.camRes': 'ความละเอียดกล้อง', 'st.camResD': 'สูงขึ้น = ตัวอักษรคมขึ้น แต่ใช้เครื่องมากขึ้น',
+    'st.camRes': 'ความละเอียดกล้อง', 'st.camResD': 'สูงขึ้น = ตัวอักษรคมขึ้น แต่ใช้เครื่องมากขึ้น (แนะนำ 4K ขึ้นไป)',
     'st.hiRes': 'ถ่ายภาพนิ่งความละเอียดสูง', 'st.hiResD': 'ถ้าเบราว์เซอร์รองรับ (Chrome บน Android) จะได้ภาพละเอียดกว่าวิดีโอ',
     'st.dup': 'ข้ามหน้าซ้ำ', 'st.dupD': 'ไม่บันทึกซ้ำถ้าเป็นหน้าเดิม (โหมดอัตโนมัติ)',
     'st.defFilter': 'ฟิลเตอร์เริ่มต้น', 'st.defFilterD': 'ใช้กับหน้าที่ถ่ายหรือนำเข้าใหม่',
-    'st.capMax': 'ขนาดภาพสูงสุดที่เก็บ', 'st.capMaxD': 'ด้านยาวสุดของภาพต้นฉบับ',
+    'st.capMax': 'ขนาดภาพสูงสุดที่เก็บ', 'st.capMaxD': 'ด้านยาวสุดของภาพต้นฉบับ — ยิ่งสูงยิ่งคมแต่กินพื้นที่',
     'st.sound': 'เสียงชัตเตอร์', 'st.vibrate': 'สั่นเมื่อถ่าย', 'st.grid': 'แสดงเส้นกริด',
     'st.storage': 'พื้นที่จัดเก็บ', 'st.storageVal': 'ใช้ {0} MB จาก {1} MB', 'st.wipe': 'ลบข้อมูลทั้งหมด', 'st.wipeText': 'ลบเอกสารและรูปทั้งหมดในแอปนี้ถาวร?', 'st.wiped': 'ลบข้อมูลแล้ว',
     'st.privacy': 'รูปและเอกสารทั้งหมดถูกเก็บและประมวลผลในเบราว์เซอร์ของคุณ ไม่มีการอัปโหลดไปที่ใด (ยกเว้นตอนโหลด OCR ครั้งแรก)',
@@ -1538,7 +2098,7 @@ const I18N = {
     'err.import': 'นำเข้าไม่ได้: {0}', 'err.load': 'โหลดรูปไม่สำเร็จ', 'err.render': 'ประมวลผลภาพไม่สำเร็จ', 'err.share': 'แชร์ไม่สำเร็จ', 'err.export': 'ส่งออกไม่สำเร็จ'
   },
   en: {
-    'app.title': 'FlowScan — continuous document scanner',
+    'app.title': 'KT-Scan — continuous document scanner',
     settings: 'Settings', close: 'Close', back: 'Back', more: 'More', cancel: 'Cancel', ok: 'OK', delete: 'Delete',
     page: 'Page', pages: '{0} pages',
     'home.scan': 'Scan', 'home.import': 'Import',
@@ -1561,6 +2121,7 @@ const I18N = {
     'cam.hintHold': 'Hold still — capturing…', 'cam.hintSteady': 'Document found — hold steady', 'cam.hintLow': 'Edges unclear — show the whole page',
     'cam.hintNext': 'Saved ✓ Flip to page {0}', 'cam.hintBack': 'Now scan the back of the card',
     'cam.hintManual': 'Press the shutter to capture', 'cam.hintManualOk': 'Document found — press shutter',
+    'cam.hintFound': '{0} found — hold steady', 'cam.hintManualFound': '{0} found — press shutter', 'cam.hintCloser': 'Too small — move a little closer', 'fmt.card': 'ID card', 'fmt.receipt': 'Receipt',
     'cam.pageSaved': 'Page {0} saved', 'cam.dup': 'Same page — skipped', 'cam.idFrontDone': 'Front done — now the back',
     'cam.noTorch': 'Torch is not available on this device',
     'cam.retry': 'Try again', 'cam.native': 'Use system camera', 'cam.importBtn': 'Choose photos',
@@ -1578,8 +2139,24 @@ const I18N = {
     'ed.applyAll': 'Apply to all pages', 'ed.applyAllTitle': 'Apply to all pages', 'ed.applyAllText': 'Apply this filter and adjustments to all {0} pages?', 'ed.applied': 'Applied to all pages',
     'ed.menuTitle': 'This page', 'ed.deletePage': 'Delete this page', 'ed.deleteText': 'Permanently delete this page?',
     'filter.original': 'Original', 'filter.magic': 'Auto color', 'filter.bw': 'B&W', 'filter.gray': 'Grayscale', 'filter.lighten': 'Bright',
-    'export.title': 'Export document', 'export.name': 'File name', 'export.format': 'Format', 'export.pageSize': 'Paper size (PDF)', 'export.fit': 'Fit to image',
-    'export.quality': 'Quality', 'export.qSmall': 'Small file (fast to send)', 'export.qStd': 'Standard', 'export.qHigh': 'High (sharp print)',
+    'filter.vivid': 'Vivid',
+    'filterD.original': 'No processing', 'filterD.magic': 'White paper, crisp text, true colour', 'filterD.vivid': 'Rich, saturated (photos/charts)', 'filterD.lighten': 'Bright, keeps the original tone', 'filterD.gray': 'Grayscale', 'filterD.bw': 'Pure black & white, best for text',
+    'ed.sat': 'Saturation',
+    'cam.colorMode': 'Color mode', 'cam.colorSet': 'Color mode: {0}', 'cam.hd': 'Shoot with the device camera (max resolution)',
+    'st.res4k': '4K (recommended)', 'st.resMax': 'Highest the camera supports', 'st.capOrig': 'Full size (original)',
+    'st.crisp': 'Automatic crisp sharpening', 'st.crispD': 'Keeps text edges sharp for printing',
+    'export.qPrint': 'Print 8K · 600 dpi (sharpest)', 'export.qNote': 'Real sharpness depends on your camera — the app never upscales past the original. 600 dpi files are large and take longer to render.',
+    'busy.renderHi': 'Rendering page {0}/{1} · {2}', 'export.doneRes': 'Exported · {0}', 'export.lowered': 'This device supports up to {0} (resolution lowered automatically)',
+    'st.donate': 'Support the developers', 'st.donateD': 'Donate via PromptPay, minimum 10 baht',
+    'donate.title': 'Support the developers', 'donate.btn': 'Donate',
+    'donate.intro': 'KT-Scan is free and ad-free. If it helps you, you can support the team (minimum 10 baht).',
+    'donate.amount': 'Amount (THB)', 'donate.custom': 'Or enter an amount', 'donate.min': 'Minimum 10 baht', 'donate.max': 'Maximum 100,000 baht per transfer', 'donate.bad': 'Please enter the amount as a number',
+    'donate.to': 'PromptPay (mobile number)', 'donate.copy': 'Copy number', 'donate.copied': 'PromptPay number copied',
+    'donate.save': 'Save QR', 'donate.saved': 'QR image saved', 'donate.done': 'Done',
+    'donate.thanks': 'Thank you for supporting the KT-Scan team ❤',
+    'donate.note': 'Scan the QR with your banking app; the amount is filled in for you. Check the recipient name in your bank app before confirming. This app stores no payment data.',
+    'export.title': 'Export document', 'export.name': 'File name', 'export.format': 'Format', 'export.pageSize': 'Paper size (PDF)', 'export.fit': 'Fit to image', 'export.auto': 'Auto (match scanned paper)', 'st.snap': 'Snap to standard paper', 'st.snapD': 'If the page is A4 / Letter / ID card etc. its proportions are corrected to match, removing perspective stretch',
+    'export.quality': 'Quality', 'export.qSmall': 'Small file (fast to send)', 'export.qStd': 'Standard', 'export.qHigh': 'High · 300 dpi (A4 print)',
     'export.pages': 'Pages to export', 'export.all': 'All ({0})', 'export.selected': 'Selected ({0})', 'export.info': '{0} page(s)',
     'export.print': 'Print', 'export.share': 'Share', 'export.download': 'Download', 'export.done': 'Export complete',
     'ocr.title': 'Extract text (OCR)', 'ocr.menu': 'Extract text from this page (OCR)', 'ocr.menuAll': 'Extract text from document (OCR)', 'ocr.lang': 'Document language',
@@ -1589,11 +2166,11 @@ const I18N = {
     'ocr.err': 'OCR unavailable (internet needed to load language data)', 'ocr.copied': 'Copied',
     'st.lang': 'Language', 'st.theme': 'Theme', 'st.themeAuto': 'System', 'st.themeLight': 'Light', 'st.themeDark': 'Dark',
     'st.hold': 'Auto-capture speed', 'st.holdD': 'How long to hold steady before capturing', 'st.holdFast': 'Fast (0.6 s)', 'st.holdNormal': 'Normal (1 s)', 'st.holdSlow': 'Slow (1.6 s)', 'st.holdVerySlow': 'Very slow (2.4 s)',
-    'st.camRes': 'Camera resolution', 'st.camResD': 'Higher = sharper text but heavier on the device',
+    'st.camRes': 'Camera resolution', 'st.camResD': 'Higher = sharper text but heavier on the device (4K+ recommended)',
     'st.hiRes': 'High-res still capture', 'st.hiResD': 'When supported (Chrome on Android) gives sharper photos than video frames',
     'st.dup': 'Skip duplicate pages', 'st.dupD': 'Don’t re-save the same page (auto mode)',
     'st.defFilter': 'Default filter', 'st.defFilterD': 'Applied to newly scanned or imported pages',
-    'st.capMax': 'Max stored image size', 'st.capMaxD': 'Longest side of the original image',
+    'st.capMax': 'Max stored image size', 'st.capMaxD': 'Longest side of the stored original — higher is sharper but uses more space',
     'st.sound': 'Shutter sound', 'st.vibrate': 'Vibrate on capture', 'st.grid': 'Show grid',
     'st.storage': 'Storage', 'st.storageVal': 'Using {0} MB of {1} MB', 'st.wipe': 'Delete all data', 'st.wipeText': 'Permanently delete all documents and images in this app?', 'st.wiped': 'All data deleted',
     'st.privacy': 'All photos and documents are stored and processed in your browser. Nothing is uploaded (except when OCR data loads the first time).',
@@ -1620,15 +2197,34 @@ const ic = (n, cls) => `<svg class="i ${cls || ''}" aria-hidden="true"><use href
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 /* ------------------------------------------------------------- settings / state */
+const SETTINGS_VER = 3;
 const DEFAULTS = {
-  lang: 'th', theme: 'auto', camRes: 1920, hold: 1, auto: true, hiRes: true, dupSkip: true,
-  sound: true, vibrate: true, grid: false, defFilter: 'magic', mode: 'doc', capMax: 2800,
-  expFormat: 'pdf', expSize: 'a4', expQuality: 'std', facing: 'environment'
+  v: SETTINGS_VER,
+  lang: 'th', theme: 'auto', camRes: 3840, hold: 1, auto: true, hiRes: true, dupSkip: true,
+  sound: true, vibrate: true, grid: false, defFilter: 'magic', mode: 'doc', capMax: 8192, crisp: true,
+  expFormat: 'pdf', expSize: 'auto', snap: true, expQuality: 'print', facing: 'environment'
 };
 function loadSettings() {
-  try { return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem('flowscan.settings') || '{}')); }
-  catch (e) { return Object.assign({}, DEFAULTS); }
+  try {
+    const st = JSON.parse(localStorage.getItem('flowscan.settings') || '{}');
+    if (st.v !== SETTINGS_VER) { if (st.v < 2) { delete st.camRes; delete st.capMax; delete st.expQuality; } delete st.expSize; st.v = SETTINGS_VER; } // v2: print-quality defaults, v3: automatic paper size
+    return Object.assign({}, DEFAULTS, st);
+  } catch (e) { return Object.assign({}, DEFAULTS); }
 }
+
+/* ------------------------------------------------------------- device limits (canvas size / memory) */
+const Hw = (() => {
+  const ua = navigator.userAgent || '';
+  const ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const mem = navigator.deviceMemory || 8;                        // GB (Chrome only; others assume plenty)
+  let area = ios ? 16.7e6 : mem <= 2 ? 16e6 : mem <= 4 ? 40e6 : 72e6;   // max pixels we dare to allocate in one canvas
+  return {
+    ios, mem,
+    get maxArea() { return area; },
+    shrink(f) { area = Math.max(4e6, area * f); },               // called when a big allocation actually failed
+    threads: Math.max(1, Math.min(4, (navigator.hardwareConcurrency || 2) - 1))
+  };
+})();
 const S = {
   settings: loadSettings(),
   docs: [],            // library (without page originals)
@@ -1817,7 +2413,7 @@ const DB = {
     try {
       this.db = await new Promise((res, rej) => {
         if (!window.indexedDB) return rej(new Error('no indexedDB'));
-        const rq = indexedDB.open('flowscan', 1);
+        const rq = indexedDB.open('flowscan', 1) /* ชื่อภายใน คงเดิมเพื่อไม่ให้ข้อมูลเก่าหาย */;
         rq.onupgradeneeded = () => {
           const d = rq.result;
           if (!d.objectStoreNames.contains('docs')) d.createObjectStore('docs', { keyPath: 'id' });
@@ -1864,12 +2460,12 @@ function newDoc(name) {
   return { id: uid(), name: name || defaultDocName(), created: Date.now(), updated: Date.now(), pages: [] };
 }
 function newPage(w, h, quad, filter) {
-  return { id: uid(), w, h, quad, rot: 0, filter: filter || 'magic', bright: 0, contrast: 0, sharp: 0, bw: 0.8, thumb: null, thumbUrl: null };
+  return { id: uid(), w, h, quad, rot: 0, filter: filter || 'magic', bright: 0, contrast: 0, sharp: 0, sat: 0, bw: 0.8, thumb: null, thumbUrl: null };
 }
 function serializeDoc(d) {
   return {
     id: d.id, name: d.name, created: d.created, updated: d.updated,
-    pages: d.pages.map((p) => ({ id: p.id, w: p.w, h: p.h, quad: p.quad, rot: p.rot, filter: p.filter, bright: p.bright, contrast: p.contrast, sharp: p.sharp, bw: p.bw, thumb: p.thumb }))
+    pages: d.pages.map((p) => ({ id: p.id, w: p.w, h: p.h, quad: p.quad, rot: p.rot, filter: p.filter, bright: p.bright, contrast: p.contrast, sharp: p.sharp, sat: p.sat || 0, bw: p.bw, thumb: p.thumb }))
   };
 }
 function hydrateDoc(r) {
@@ -1920,8 +2516,9 @@ async function decodeBlob(blob) {
 }
 
 /* high-quality downscale by repeated halving; never upscales */
-function scaleToCanvas(src, sw, sh, maxSide) {
-  const k = Math.min(1, maxSide / Math.max(sw, sh));
+function scaleToCanvas(src, sw, sh, maxSide, maxArea) {
+  let k = Math.min(1, maxSide / Math.max(sw, sh));
+  if (maxArea) k = Math.min(k, Math.sqrt(maxArea / (sw * sh)));
   const tw = Math.max(1, Math.round(sw * k)), th = Math.max(1, Math.round(sh * k));
   let cur = src, cw = sw, ch = sh;
   while (cw / 2 >= tw && ch / 2 >= th) {
@@ -1963,9 +2560,14 @@ function seedSrc(page, cv) {
   SrcCache.set(page.id, { prev, thumb });
 }
 
+/* originals are large now -> keep only the most recent few in memory (the rest are read back from IndexedDB) */
+function cacheOrig(id, blob) {
+  S.origCache.delete(id); S.origCache.set(id, blob);
+  while (S.origCache.size > 6) S.origCache.delete(S.origCache.keys().next().value);
+}
 async function getOrigBlob(page) {
   let b = S.origCache.get(page.id);
-  if (!b) { b = await DB.getOrig(page.id); if (b) S.origCache.set(page.id, b); }
+  if (!b) { b = await DB.getOrig(page.id); if (b) cacheOrig(page.id, b); }
   return b;
 }
 
@@ -1994,6 +2596,8 @@ async function loadFull(page) {
 }
 
 const quadToPx = (quad, W, H) => quad.map((p) => [p.x * W, p.y * H]);
+/* output pages get the true proportions of standard paper (A4 / Letter / ID card ...) when the corners say so */
+const snapFor = (W, H) => (S.settings.snap === false ? null : { w: W, h: H });
 
 /* returns {width,height,data} — perspective-corrected, not yet filtered */
 async function warpPage(page, level, maxDim) {
@@ -2001,10 +2605,10 @@ async function warpPage(page, level, maxDim) {
   const W = cv.width, H = cv.height;
   const data = ctx2d(cv, true).getImageData(0, 0, W, H);
   const Q = quadToPx(page.quad, W, H);
-  const [ow, oh] = Core.estimateOutputSize(Q, maxDim);
+  const [ow, oh] = Core.estimateOutputSize(Q, maxDim, snapFor(W, H));
   return Core.warpPerspective(data, Q, ow, oh);
 }
-const filterOpts = (p) => ({ filter: p.filter, bright: p.bright, contrast: p.contrast, sharp: p.sharp, bwLevel: p.bw });
+const filterOpts = (p) => ({ filter: p.filter, bright: p.bright, contrast: p.contrast, sharp: p.sharp, sat: p.sat || 0, bwLevel: p.bw, crisp: S.settings.crisp ? 1 : 0 });
 function pixelsToCanvas(img) {
   const c = mkCanvas(img.width, img.height);
   ctx2d(c).putImageData(new ImageData(img.data, img.width, img.height), 0, 0);
@@ -2015,6 +2619,134 @@ async function renderPage(page, level, maxDim) {
   Core.applyFilter(w, filterOpts(page));
   return rotateCanvas(pixelsToCanvas(w), page.rot);
 }
+
+/* ------------------------------------------------------------- print-quality renderer
+   Renders the page at (up to) targetLong px on its long side, in horizontal bands so that only a small part of
+   the pixels is ever held as raw RGBA. Bands are processed by Web Workers when available.
+   Output resolution never exceeds the source's native resolution (no fake detail). */
+const rotQuad = (Q, r) => { r = ((r % 4) + 4) % 4; return Q.map((_, i) => Q[(i - r + 4) % 4]); };
+const WORKER_GLUE = `
+self.onmessage = function (e) {
+  var m = e.data;
+  try {
+    var out = Core.renderBand({ width: m.bw, height: m.bh, data: new Uint8ClampedArray(m.buf) }, m.job);
+    self.postMessage({ id: m.id, buf: out.data.buffer }, [out.data.buffer]);
+  } catch (err) { self.postMessage({ id: m.id, error: String((err && err.message) || err) }); }
+};`;
+function makeWorkers(n) {
+  if (typeof Worker === 'undefined' || n < 1) return null;
+  const el = document.getElementById('coreSrc');
+  if (!el) return null;
+  let url = null;
+  try {
+    url = URL.createObjectURL(new Blob([el.textContent, WORKER_GLUE], { type: 'text/javascript' }));
+    const ws = [];
+    for (let i = 0; i < n; i++) ws.push(new Worker(url));
+    return { ws, url };
+  } catch (e) { if (url) URL.revokeObjectURL(url); return null; }
+}
+function workerCall(w, msg, transfer) {
+  return new Promise((resolve, reject) => {
+    const end = () => { w.onmessage = null; w.onerror = null; };
+    w.onmessage = (e) => { end(); if (e.data.error) reject(new Error(e.data.error)); else resolve(e.data.buf); };
+    w.onerror = (e) => { end(); reject(new Error((e && e.message) || 'worker error')); };
+    w.postMessage(msg, transfer);
+  });
+}
+
+async function renderFinal(page, targetLong, onProg) {
+  const src = await loadFull(page);
+  let cv = src, cw = src.width, ch = src.height;
+  const nq = page.quad;
+  let Q = rotQuad(quadToPx(nq, cw, ch), page.rot);
+  const nat = Math.max.apply(null, Core.estimateOutputSize(Q, Infinity));
+  if (nat > targetLong * 1.15) {                 // source is denser than the output -> area-average first (no aliasing)
+    const k = (targetLong * 1.15) / nat;
+    cv = scaleToCanvas(src, cw, ch, Math.round(Math.max(cw, ch) * k));
+    src.width = src.height = 1;
+    cw = cv.width; ch = cv.height;
+    Q = rotQuad(quadToPx(nq, cw, ch), page.rot);
+  }
+  let [ow, oh] = Core.estimateOutputSize(Q, targetLong, snapFor(cw, ch));
+  if (ow * oh > Hw.maxArea) { const k = Math.sqrt(Hw.maxArea / (ow * oh)); ow = Math.round(ow * k); oh = Math.round(oh * k); }
+  const fopts = filterOpts(page);
+  fopts.fullLong = Math.max(ow, oh);
+  // page-wide statistics (paper colour / levels) come from a small copy so every band is treated identically
+  let bg = null;
+  if (Core.needsBg(page.filter) || page.filter === 'lighten') {
+    const lowCv = scaleToCanvas(cv, cw, ch, 1600);
+    const lowQ = rotQuad(quadToPx(nq, lowCv.width, lowCv.height), page.rot);
+    const [lw, lh] = Core.estimateOutputSize(lowQ, 1400, snapFor(lowCv.width, lowCv.height));
+    const low = Core.warpPerspective(ctx2d(lowCv).getImageData(0, 0, lowCv.width, lowCv.height), lowQ, lw, lh);
+    if (lowCv !== cv) lowCv.width = lowCv.height = 1;
+    if (page.filter === 'lighten') fopts.levels = Core.autoLevelsRange(low.data);
+    else { const B = Core.estimateBackground(low); bg = { sw: B.sw, sh: B.sh, cell: B.cell * ((ow / lw + oh / lh) / 2), bg: B.bg, paper: B.paper }; }
+  }
+  const out = mkCanvas(ow, oh), octx = ctx2d(out);
+  if (!octx) throw new Error('canvas-limit');
+  octx.fillStyle = '#fff'; octx.fillRect(0, 0, ow, oh);
+  if (octx.getImageData(ow - 1, oh - 1, 1, 1).data[3] !== 255) throw new Error('canvas-limit');
+
+  const HALO = Core.SHARP_HALO;
+  const bh = Math.max(32, Math.min(512, Math.round(1.6e6 / ow)));
+  const bands = [];
+  for (let y = 0; y < oh; y += bh) bands.push([y, Math.min(oh, y + bh)]);
+  const sctx = ctx2d(cv);
+  const pool = makeWorkers(Math.min(Hw.threads, bands.length));
+  let next = 0, done = 0;
+  const lane = async (worker) => {
+    let w = worker;
+    while (next < bands.length) {
+      const [y0, y1] = bands[next++];
+      const ya = Math.max(0, y0 - HALO), yb = Math.min(oh, y1 + HALO);
+      const r = Core.bandSourceRect(Q, ow, oh, ya, yb, cw, ch, 3);
+      const job = { quad: Q, outW: ow, outH: oh, ya, yb, ox: r.x, oy: r.y, fopts, bg };
+      let buf = null;
+      if (w) {
+        const sd = sctx.getImageData(r.x, r.y, r.w, r.h);
+        try { buf = await workerCall(w, { job, bw: r.w, bh: r.h, buf: sd.data.buffer }, [sd.data.buffer]); }
+        catch (e) { console.warn('worker failed — continuing on the main thread', e); w = null; }
+      }
+      if (!buf) {
+        buf = Core.renderBand(sctx.getImageData(r.x, r.y, r.w, r.h), job).data.buffer;
+        await sleep(0);
+      }
+      octx.putImageData(new ImageData(new Uint8ClampedArray(buf), ow, yb - ya), 0, ya, 0, y0 - ya, ow, y1 - y0);
+      done++;
+      if (onProg) onProg(done / bands.length);
+    }
+  };
+  try {
+    const lanes = pool ? pool.ws : [null];
+    await Promise.all(lanes.map((w) => lane(w)));
+  } finally {
+    if (pool) { pool.ws.forEach((w) => w.terminate()); URL.revokeObjectURL(pool.url); }
+    cv.width = cv.height = 1;
+  }
+  return out;
+}
+
+/* render + encode with automatic step-down when the device cannot allocate / encode a canvas that big */
+async function renderToBlob(page, targetLong, mime, quality, onProg) {
+  let T = targetLong, last = null;
+  for (let i = 0; i < 5; i++) {
+    try {
+      const c = await renderFinal(page, T, onProg);
+      const blob = await canvasToBlob(c, mime, quality);
+      const r = { blob, w: c.width, h: c.height, lowered: T < targetLong };
+      c.width = c.height = 1;
+      return r;
+    } catch (e) {
+      last = e; console.warn('render at', T, 'px failed:', e);
+      if (e instanceof RangeError || /canvas-limit|toBlob|memory|alloc/i.test(String((e && e.message) || e))) Hw.shrink(0.6);
+      T = Math.round(T * 0.75);
+      if (T < 1000) break;
+      await sleep(30);
+    }
+  }
+  throw last || new Error('render failed');
+}
+
 async function updateThumb(page) {
   const c = await renderPage(page, 'thumb', 360);
   const blob = await canvasToBlob(c, 'image/jpeg', 0.82);
@@ -2026,7 +2758,7 @@ async function updateThumb(page) {
 /* ------------------------------------------------------------- doc operations */
 async function addPageToDoc(doc, page, blob, cv) {
   doc.pages.push(page);
-  S.origCache.set(page.id, blob);
+  cacheOrig(page.id, blob);
   if (cv) seedSrc(page, cv);
   await DB.putOrig(page.id, blob);
   scheduleSave(doc, 150);
@@ -2047,8 +2779,8 @@ function defaultQuad(inset) {
 function detectInCanvas(cv, opt) {
   const small = scaleToCanvas(cv, cv.width, cv.height, (opt && opt.size) || 480);
   const data = ctx2d(small, true).getImageData(0, 0, small.width, small.height);
-  const r = Core.detectDocument(data, Object.assign({ okScore: 0.22, okSupport: 0.3 }, opt || {}));
-  if (r && r.score >= 0.2 && r.support >= 0.25) return { quad: r.quad, ok: true, score: r.score };
+  const r = Core.detectDocument(data, Object.assign({ minArea: 0.02, thorough: true }, opt || {}));
+  if (r && r.score >= 0.28 && r.support >= 0.4) return { quad: r.quad, ok: true, score: r.score, kind: r.kind, label: r.label, aspect: r.aspect };
   return { quad: defaultQuad(), ok: false, score: r ? r.score : 0 };
 }
 
@@ -2110,6 +2842,7 @@ function syncCamControls() {
   $$('#camModes button').forEach((x) => x.classList.toggle('on', x.dataset.mode === Cam.mode));
   $('#camFlash').classList.toggle('on', Cam.torch);
   $('#camFlash').innerHTML = ic(Cam.torch ? 'bolt' : 'bolt-off');
+  $('#camColorLbl').textContent = t('filter.' + S.settings.defFilter);
   if (!auto) { Cam.progress = 0; updateRing(); }
 }
 function hideCamMsg() { $('#camMsg').hidden = true; }
@@ -2152,7 +2885,7 @@ async function camStart() {
   updateRing();
   setHint(t('cam.starting'));
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { showCamError(null); return; }
-  const res = +S.settings.camRes;
+  const res = +S.settings.camRes;     // long side we would like; the browser picks the closest mode the camera really has
   const vbase = { width: { ideal: res }, height: { ideal: Math.round(res * 0.75) } };
   const tries = [];
   if (Cam.devId) tries.push(Object.assign({ deviceId: { exact: Cam.devId } }, vbase));
@@ -2173,6 +2906,8 @@ async function camStart() {
   try { await Cam.video.play(); } catch (e) { /* autoplay policies — muted so normally fine */ }
   Cam.caps = (Cam.track.getCapabilities && Cam.track.getCapabilities()) || {};
   try { Cam.ic = (window.ImageCapture && S.settings.hiRes) ? new ImageCapture(Cam.track) : null; } catch (e) { Cam.ic = null; }
+  Cam.photoCaps = null;
+  if (Cam.ic && Cam.ic.getPhotoCapabilities) Cam.ic.getPhotoCapabilities().then((c) => { if (token === Cam.token) Cam.photoCaps = c; }).catch(() => {});
   try {
     if (Cam.caps.focusMode && Cam.caps.focusMode.indexOf('continuous') >= 0) await Cam.track.applyConstraints({ advanced: [{ focusMode: 'continuous' }] });
   } catch (e) { /* ignore */ }
@@ -2205,9 +2940,11 @@ async function camStart() {
 function camLoop(ts) {
   if (!Cam.running) return;
   Cam.raf = requestAnimationFrame(camLoop);
-  if (ts - Cam.lastDet >= 100) {
+  if (ts - Cam.lastDet >= Math.max(100, (Cam.detCost || 0) * 2.5)) {   // slower phones get a longer gap so the preview stays smooth
     Cam.lastDet = ts;
+    const t0 = performance.now();
     try { detectTick(ts); } catch (e) { console.error(e); }
+    Cam.detCost = (Cam.detCost || 0) * 0.7 + (performance.now() - t0) * 0.3;
   }
   drawOverlay(ts);
 }
@@ -2267,6 +3004,14 @@ function drawOverlay(ts) {
     c.stroke();
     c.fillStyle = `rgb(${col})`;
     pts.forEach((p) => { c.beginPath(); c.arc(p[0], p[1], 5 + 2 * prog, 0, 7); c.fill(); });
+    const fn = Cam.fmt ? fmtName(Cam.fmt) : '';
+    if (fn) {
+      const cx = (pts[0][0] + pts[1][0] + pts[2][0] + pts[3][0]) / 4, cy = (pts[0][1] + pts[1][1] + pts[2][1] + pts[3][1]) / 4;
+      c.font = '700 15px system-ui, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      const tw = c.measureText(fn).width + 22;
+      c.fillStyle = 'rgba(0,0,0,.55)'; roundRectPath(c, cx - tw / 2, cy - 14, tw, 28, 14); c.fill();
+      c.fillStyle = `rgb(${col})`; c.fillText(fn, cx, cy + 1);
+    }
   } else {
     // searching: guide + sweeping scan line
     if (isId) {
@@ -2290,6 +3035,8 @@ function drawOverlay(ts) {
 }
 
 /* ------------------------------------------------------------- detection + auto-capture */
+const FMT_NAMES = { a: 'A4', letter: 'Letter', legal: 'Legal', photo: '4×6', sq: '1:1' };
+function fmtName(kind) { return FMT_NAMES[kind] || (kind === 'card' ? t('fmt.card') : kind === 'receipt' ? t('fmt.receipt') : ''); }
 function detectTick(ts) {
   const v = Cam.video;
   if (v.readyState < 2 || !v.videoWidth || Cam.capturing || document.hidden || Cam.token === 0) return;
@@ -2307,16 +3054,23 @@ function detectTick(ts) {
   Cam.lastSig = sig;
 
   const isId = Cam.mode === 'id';
-  const r = Core.detectDocument(img, { minArea: isId ? 0.035 : 0.10 });
+  const r = Core.detectDocument(img, { minArea: isId ? 0.03 : 0.02, prefer: isId ? 'card' : 'auto' });
   let ok = !!(r && r.ok);
   if (ok && isId) { const a = quadAspectPx(r.quad, vw, vh); ok = a > 1.25 && a < 2.0; }
-  if (r && r.score >= 0.16) {
+  Cam.tiny = !!(ok && !isId && r.frac < 0.035);            // found, but too small in the frame to scan sharply
+  if (Cam.tiny) ok = false;
+  if (r && r.score >= 0.22) {
     const q = r.quad;
-    if (!Cam.smooth || quadDelta(Cam.smooth, q) > 0.12) Cam.smooth = q.map((p) => ({ x: p.x, y: p.y }));
+    if (!Cam.smooth || quadDelta(Cam.smooth, q) > 0.12) { Cam.smooth = q.map((p) => ({ x: p.x, y: p.y })); Cam.fmtHist = []; }
     else Cam.smooth = Cam.smooth.map((p, i) => ({ x: p.x + (q[i].x - p.x) * 0.5, y: p.y + (q[i].y - p.y) * 0.5 }));
     Cam.missing = 0; Cam.hasDet = true;
-  } else if (++Cam.missing > 4) { Cam.smooth = null; Cam.hasDet = false; }
-  const qNow = r && r.score >= 0.16 ? r.quad : null;
+    Cam.fmtHist = (Cam.fmtHist || []).concat(r.label ? r.kind : 'free').slice(-9);      // vote over the last frames so the label does not flicker
+    const cnt = {}; Cam.fmtHist.forEach((k) => { cnt[k] = (cnt[k] || 0) + 1; });
+    const top = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0];
+    Cam.fmt = cnt[top] >= 4 ? top : '';
+    if (Cam.fmt === 'free') Cam.fmt = '';
+  } else if (++Cam.missing > 4) { Cam.smooth = null; Cam.hasDet = false; Cam.fmt = ''; Cam.fmtHist = []; }
+  const qNow = r && r.score >= 0.22 ? r.quad : null;
   const moved = qNow && Cam.prevQuad ? quadDelta(qNow, Cam.prevQuad) : 1;
   Cam.prevQuad = qNow; Cam.quadNow = qNow; Cam.okNow = ok;
   const steady = ok && moved < 0.025 && motion < 6;
@@ -2324,7 +3078,7 @@ function detectTick(ts) {
   if (!S.settings.auto) {
     Cam.progress = 0; Cam.stableMs = 0; updateRing();
     if (Cam.idFront) setHint(t('cam.hintBack'), ok ? 'ok' : '');
-    else setHint(ok ? t('cam.hintManualOk') : t('cam.hintManual'), ok ? 'ok' : '');
+    else setHint(ok ? (Cam.fmt ? t('cam.hintManualFound', fmtName(Cam.fmt)) : t('cam.hintManualOk')) : t('cam.hintManual'), ok ? 'ok' : '');
     return;
   }
   if (Cam.needChange) {
@@ -2341,7 +3095,8 @@ function detectTick(ts) {
   if (Cam.needChange) setHint(Cam.idFront ? t('cam.hintBack') : t('cam.hintNext', Cam.count + 1), 'ok');
   else if (!Cam.hasDet) setHint(Cam.idFront ? t('cam.hintBack') : (isId ? t('cam.hintId') : t('cam.hintSearch')));
   else if (steady) setHint(t('cam.hintHold'), 'ok');
-  else if (ok) setHint(t('cam.hintSteady'), 'ok');
+  else if (ok) setHint(Cam.fmt ? t('cam.hintFound', fmtName(Cam.fmt)) : t('cam.hintSteady'), 'ok');
+  else if (Cam.tiny) setHint(t('cam.hintCloser'), 'warn');
   else setHint(t('cam.hintLow'), 'warn');
 
   if (Cam.progress >= 1) { Cam.stableMs = 0; camCapture('auto'); }
@@ -2360,7 +3115,12 @@ async function grabFrame() {
   const v = Cam.video;
   if (Cam.ic && S.settings.hiRes) {
     try {
-      const blob = await withTimeout(Cam.ic.takePhoto(), 3000);
+      let blob = null;
+      const pc = Cam.photoCaps;
+      if (pc && pc.imageWidth && pc.imageHeight && pc.imageWidth.max) {      // ask for the sensor's full size
+        try { blob = await withTimeout(Cam.ic.takePhoto({ imageWidth: pc.imageWidth.max, imageHeight: pc.imageHeight.max }), 8000); } catch (e) { blob = null; }
+      }
+      if (!blob) blob = await withTimeout(Cam.ic.takePhoto(), 5000);
       const bmp = await createImageBitmap(blob);
       const stillLand = bmp.width >= bmp.height, vidLand = v.videoWidth >= v.videoHeight;
       if (stillLand === vidLand) return { src: bmp, w: bmp.width, h: bmp.height, still: true };
@@ -2435,7 +3195,7 @@ function composeIdPage(front, back) {
 async function addCapturedPage(cv, quad, filter) {
   const doc = ensureDoc();
   S.doc = doc;
-  const blob = await canvasToBlob(cv, 'image/jpeg', 0.9);
+  const blob = await canvasToBlob(cv, 'image/jpeg', 0.95);
   const page = newPage(cv.width, cv.height, quad, filter || S.settings.defFilter);
   await addPageToDoc(doc, page, blob, cv);
   Cam.count++;
@@ -2446,9 +3206,9 @@ async function addCapturedPage(cv, quad, filter) {
 
 /* shared by live capture and "system camera" fallback. returns 'ok' | 'dup' | 'front' | 'fail' */
 async function ingestFrame(src, sw, sh, opt) {
-  const cv = scaleToCanvas(src, sw, sh, +S.settings.capMax);
+  const cv = scaleToCanvas(src, sw, sh, +S.settings.capMax, Hw.maxArea);
   const isId = Cam.mode === 'id' && opt.trigger !== 'import';
-  const det = detectInCanvas(cv, { minArea: isId ? 0.035 : 0.08 });
+  const det = detectInCanvas(cv, { minArea: isId ? 0.03 : 0.02, prefer: isId ? 'card' : 'auto' });
   let quad = det.quad, detOk = det.ok;
   if (!detOk && opt.live && opt.liveOk) { quad = opt.live; detOk = true; }
 
@@ -2496,10 +3256,10 @@ async function importFiles(files, doc, opts) {
     await nextFrame();
     try {
       const d = await decodeBlob(files[i]);
-      const cv = scaleToCanvas(d.src, d.w, d.h, +S.settings.capMax);
+      const cv = scaleToCanvas(d.src, d.w, d.h, +S.settings.capMax, Hw.maxArea);
       d.close();
-      const det = detectInCanvas(cv, { minArea: 0.08 });
-      const blob = await canvasToBlob(cv, 'image/jpeg', 0.9);
+      const det = detectInCanvas(cv, { minArea: 0.02 });
+      const blob = await canvasToBlob(cv, 'image/jpeg', 0.95);
       const page = newPage(cv.width, cv.height, det.quad, S.settings.defFilter);
       await addPageToDoc(target, page, blob, cv);
       await updateThumb(page);
@@ -2558,6 +3318,13 @@ function initCamera() {
     Cam.idFront = null; Cam.needChange = false; Cam.hintKey = ''; syncCamControls(); updateCamCounter();
   }));
   $('#camGrid').addEventListener('click', () => { S.settings.grid = !S.settings.grid; saveSettings(); syncCamControls(); });
+  $('#camColor').addEventListener('click', () => {
+    openMenu(t('cam.colorMode'), Core.FILTERS.map((f) => ({
+      icon: f === S.settings.defFilter ? 'check' : 'dot', label: t('filter.' + f) + ' — ' + t('filterD.' + f),
+      fn: () => { S.settings.defFilter = f; saveSettings(); syncCamControls(); toast(t('cam.colorSet', t('filter.' + f)), 1500, 'ok'); }
+    })));
+  });
+  $('#camHD').addEventListener('click', () => $('#fileShot').click());
   $('#camFlash').addEventListener('click', async () => {
     if (!Cam.track || !Cam.caps.torch) return;
     Cam.torch = !Cam.torch;
@@ -2661,6 +3428,7 @@ function syncEdControls() {
   if (!p) return;
   $('#slBright').value = p.bright; $('#outBright').textContent = p.bright;
   $('#slContrast').value = p.contrast; $('#outContrast').textContent = p.contrast;
+  $('#slSat').value = p.sat || 0; $('#outSat').textContent = p.sat || 0;
   $('#slSharp').value = p.sharp; $('#outSharp').textContent = p.sharp;
   $('#slBw').value = Math.round(p.bw * 100); $('#outBw').textContent = Math.round(p.bw * 100);
   $('#bwRow').hidden = p.filter !== 'bw';
@@ -2707,7 +3475,7 @@ function renderFiltered(small) {
   const copy = { width: base.width, height: base.height, data: new Uint8ClampedArray(base.data) };
   const p = E.page;
   let bgc = null;
-  if (p.filter === 'magic' || p.filter === 'gray' || p.filter === 'bw') {
+  if (Core.needsBg(p.filter)) {
     if (small) { E.bgcS = E.bgcS || Core.estimateBackground(base); bgc = E.bgcS; }
     else { E.bgc = E.bgc || Core.estimateBackground(base); bgc = E.bgc; }
   }
@@ -2951,7 +3719,7 @@ async function applyToAll() {
   const p = E.page, d = E.doc;
   const ok = await askConfirm(t('ed.applyAllTitle'), t('ed.applyAllText', d.pages.length), t('ok'));
   if (!ok) return;
-  d.pages.forEach((q) => { q.filter = p.filter; q.bright = p.bright; q.contrast = p.contrast; q.sharp = p.sharp; q.bw = p.bw; });
+  d.pages.forEach((q) => { q.filter = p.filter; q.bright = p.bright; q.contrast = p.contrast; q.sharp = p.sharp; q.sat = p.sat || 0; q.bw = p.bw; });
   scheduleSave(d, 100);
   for (let i = 0; i < d.pages.length; i++) {
     busy(t('busy.thumbs', i + 1, d.pages.length), i / d.pages.length);
@@ -3011,10 +3779,11 @@ function initEditor() {
   };
   bind('#slBright', '#outBright', 'bright');
   bind('#slContrast', '#outContrast', 'contrast');
+  bind('#slSat', '#outSat', 'sat');
   bind('#slSharp', '#outSharp', 'sharp');
   bind('#slBw', '#outBw', 'bw', 100);
   $('#edResetAdj').addEventListener('click', () => {
-    Object.assign(E.page, { bright: 0, contrast: 0, sharp: 0 });
+    Object.assign(E.page, { bright: 0, contrast: 0, sharp: 0, sat: 0 });
     syncEdControls();
     const c = renderFiltered(false); if (c) drawResultCanvas(c);
     edCommitSoon();
@@ -3189,10 +3958,10 @@ function fillFilterSelect() {
 async function openSettings() {
   const s = S.settings;
   $('#stLang').value = LANG; $('#stTheme').value = s.theme; $('#stHold').value = String(s.hold);
-  $('#stRes').value = String(s.camRes); $('#stHiRes').checked = !!s.hiRes; $('#stDup').checked = !!s.dupSkip;
-  $('#stFilter').value = s.defFilter; $('#stCap').value = String(s.capMax);
+  $('#stRes').value = String(s.camRes); $('#stHiRes').checked = !!s.hiRes; $('#stDup').checked = !!s.dupSkip; $('#stSnap').checked = s.snap !== false;
+  $('#stFilter').value = s.defFilter; $('#stCap').value = String(s.capMax); $('#stCrisp').checked = !!s.crisp;
   $('#stSound').checked = !!s.sound; $('#stVib').checked = !!s.vibrate; $('#stGrid').checked = !!s.grid;
-  $('#stAbout').textContent = `FlowScan v${APP_VERSION}`;
+  $('#stAbout').textContent = `KT-Scan v${APP_VERSION}`;
   $('#dlgSettings').showModal();
   try {
     if (navigator.storage && navigator.storage.estimate) {
@@ -3212,8 +3981,11 @@ function initSettings() {
   on('#stRes', (el) => { S.settings.camRes = +el.value; if (Cam.running) camStart(); });
   on('#stHiRes', (el) => { S.settings.hiRes = el.checked; if (Cam.running) camStart(); });
   on('#stDup', (el) => { S.settings.dupSkip = el.checked; });
+  on('#stSnap', (el) => { S.settings.snap = el.checked; });
   on('#stFilter', (el) => { S.settings.defFilter = el.value; });
   on('#stCap', (el) => { S.settings.capMax = +el.value; });
+  on('#stCrisp', (el) => { S.settings.crisp = el.checked; });
+  $('#stDonate').addEventListener('click', () => { dlg.close(); setTimeout(openDonate, 40); });
   on('#stSound', (el) => { S.settings.sound = el.checked; });
   on('#stVib', (el) => { S.settings.vibrate = el.checked; });
   on('#stGrid', (el) => { S.settings.grid = el.checked; syncCamControls(); });
@@ -3319,7 +4091,8 @@ function initLibrary() {
 /* ====================================================================
    EXPORT — PDF / JPG / PNG / ZIP, share, print, OCR
    ==================================================================== */
-const QUAL = { small: { max: 1600, q: 0.72 }, std: { max: 2200, q: 0.86 }, high: { max: 3200, q: 0.93 } };
+/* max = long side in px: A4 @150/300/600 dpi -> 1754 / 3508 / 7016 (600 dpi A4 = 34.8 MP, the same pixel count as 8K UHD) */
+const QUAL = { small: { max: 1600, q: 0.72 }, std: { max: 2480, q: 0.86 }, high: { max: 3508, q: 0.93 }, print: { max: 7016, q: 0.95 } };
 const Ex = { doc: null, sel: null, scope: 'all' };
 
 function chipGroup(root, onChange) {
@@ -3370,25 +4143,26 @@ function exportOpen(doc, sel) {
 async function exBuild(pages, fmt, name) {
   const Q = QUAL[S.settings.expQuality] || QUAL.std;
   const items = [];
+  const mime = fmt === 'png' ? 'image/png' : 'image/jpeg';
+  let maxW = 0, maxH = 0, lowered = false;
   for (let i = 0; i < pages.length; i++) {
-    busy(t('busy.render', i + 1, pages.length), i / pages.length);
+    const label = (r) => t('busy.renderHi', i + 1, pages.length, Q.max >= 5000 ? '600 dpi' : Q.max >= 3000 ? '300 dpi' : '');
+    busy(label(), i / pages.length);
     await nextFrame();
-    const c = await renderPage(pages[i], 'full', Q.max);
-    if (fmt === 'pdf') {
-      const blob = await canvasToBlob(c, 'image/jpeg', Q.q);
-      items.push({ jpeg: new Uint8Array(await blob.arrayBuffer()), w: c.width, h: c.height });
-    } else {
-      const blob = await canvasToBlob(c, fmt === 'png' ? 'image/png' : 'image/jpeg', Q.q);
-      items.push({ blob, w: c.width, h: c.height });
-    }
+    const r = await renderToBlob(pages[i], Q.max, mime, Q.q, (f) => busy(label(), (i + f) / pages.length));
+    if (r.lowered) lowered = true;
+    if (r.w * r.h > maxW * maxH) { maxW = r.w; maxH = r.h; }
+    if (fmt === 'pdf') items.push({ jpeg: new Uint8Array(await r.blob.arrayBuffer()), w: r.w, h: r.h });
+    else items.push({ blob: r.blob, w: r.w, h: r.h });
   }
+  const info = { res: `${maxW.toLocaleString('en-US')}×${maxH.toLocaleString('en-US')} px`, lowered };
   if (fmt === 'pdf') {
     busy(t('busy.pdf'), 1);
     await nextFrame();
     const bytes = Core.buildPDF(items, { size: S.settings.expSize, margin: S.settings.expSize === 'fit' ? 0 : 0, title: name });
-    return { kind: 'pdf', blob: new Blob([bytes], { type: 'application/pdf' }), ext: '.pdf' };
+    return { kind: 'pdf', blob: new Blob([bytes], { type: 'application/pdf' }), ext: '.pdf', info };
   }
-  return { kind: 'img', items, ext: fmt === 'png' ? '.png' : '.jpg', mime: fmt === 'png' ? 'image/png' : 'image/jpeg' };
+  return { kind: 'img', items, ext: fmt === 'png' ? '.png' : '.jpg', mime, info };
 }
 
 async function exRun(action) {
@@ -3420,7 +4194,7 @@ async function exRun(action) {
       downloadBlob(new Blob([Core.buildZip(zipFiles)], { type: 'application/zip' }), name + '.zip');
     }
     unbusy();
-    toast(t('export.done'), 2200, 'ok');
+    toast(res.info.lowered ? t('export.lowered', res.info.res) : t('export.doneRes', res.info.res), res.info.lowered ? 4200 : 2600, 'ok');
   } catch (e) {
     console.error(e);
     unbusy();
@@ -3437,8 +4211,7 @@ async function printPages(pages) {
     for (let i = 0; i < pages.length; i++) {
       busy(t('busy.render', i + 1, pages.length), i / pages.length);
       await nextFrame();
-      const c = await renderPage(pages[i], 'full', 2200);
-      const blob = await canvasToBlob(c, 'image/jpeg', 0.88), url = URL.createObjectURL(blob);
+      const r = await renderToBlob(pages[i], 3508, 'image/jpeg', 0.92), url = URL.createObjectURL(r.blob);
       urls.push(url);
       const im = new Image(); im.src = url; im.alt = '';
       area.appendChild(im);
@@ -3523,6 +4296,102 @@ function initExport() {
   });
 }
 
+/* ---- 70-donate.js ---- */
+/* ====================================================================
+   DONATE — PromptPay QR (amount filled in), minimum 10 THB
+   Everything is generated on the device; nothing is sent anywhere.
+   ==================================================================== */
+const PROMPTPAY_ID = '0840958691';
+const DONATE_MIN = 10, DONATE_MAX = 100000;
+const Dn = { amount: 50, valid: true };
+
+const fmtPhone = (n) => n.replace(/^(\d{3})(\d{3})(\d{4})$/, '$1-$2-$3');
+const fmtBaht = (v) => (Math.round(v * 100) % 100 === 0 ? String(Math.round(v)) : v.toFixed(2)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+/* draw the QR matrix; quiet zone of 4 modules */
+function drawQR(canvas, matrix, px) {
+  const n = matrix.length, q = 4, size = (n + q * 2) * px;
+  canvas.width = size; canvas.height = size;
+  const x = canvas.getContext('2d');
+  x.fillStyle = '#fff'; x.fillRect(0, 0, size, size);
+  x.fillStyle = '#111';
+  for (let y = 0; y < n; y++) for (let k = 0; k < n; k++) if (matrix[y][k]) x.fillRect((k + q) * px, (y + q) * px, px, px);
+}
+
+function dnParse() {
+  const raw = ($('#dnCustom').value || '').trim().replace(',', '.');
+  if (raw === '') return { v: Dn.amount, err: '' };
+  const v = Number(raw);
+  if (!isFinite(v)) return { v: NaN, err: t('donate.bad') };
+  const r = Math.round(v * 100) / 100;
+  if (r < DONATE_MIN) return { v: r, err: t('donate.min') };
+  if (r > DONATE_MAX) return { v: r, err: t('donate.max') };
+  return { v: r, err: '' };
+}
+function dnRender() {
+  const p = dnParse(), box = $('#dnQrBox'), err = $('#dnErr');
+  Dn.valid = !p.err;
+  err.hidden = !p.err; err.textContent = p.err;
+  box.classList.toggle('off', !Dn.valid);
+  $('#dnSave').disabled = !Dn.valid; $('#dnDone').disabled = !Dn.valid;
+  if (!Dn.valid) return;
+  Dn.amount = p.v;
+  const m = Core.qrEncode(Core.promptPayPayload(PROMPTPAY_ID, Dn.amount));
+  drawQR($('#dnQr'), m, Math.max(4, Math.floor(320 / (m.length + 8))));
+}
+function openDonate() {
+  Dn.amount = 50;
+  $('#dnCustom').value = '';
+  $$('#dnAmts button').forEach((b) => b.classList.toggle('on', b.dataset.v === '50'));
+  $('#dnNum').textContent = fmtPhone(PROMPTPAY_ID);
+  dnRender();
+  $('#dlgDonate').showModal();
+}
+
+/* printable card: big QR + amount + number */
+async function dnSaveImage() {
+  if (!Dn.valid) return;
+  const m = Core.qrEncode(Core.promptPayPayload(PROMPTPAY_ID, Dn.amount));
+  const qc = document.createElement('canvas');
+  drawQR(qc, m, Math.max(8, Math.floor(720 / (m.length + 8))));
+  const W = 900, pad = 60, qs = W - pad * 2, H = pad + 90 + qs + 190;
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const x = c.getContext('2d');
+  x.fillStyle = '#fff'; x.fillRect(0, 0, W, H);
+  x.textAlign = 'center'; x.fillStyle = '#e8470f'; x.font = '700 52px system-ui, "Noto Sans Thai", sans-serif';
+  x.fillText('KT-Scan', W / 2, pad + 52);
+  x.imageSmoothingEnabled = false;
+  x.drawImage(qc, pad, pad + 90, qs, qs);
+  x.imageSmoothingEnabled = true;
+  x.fillStyle = '#111'; x.font = '700 54px system-ui, "Noto Sans Thai", sans-serif';
+  x.fillText(`PromptPay  ${fmtPhone(PROMPTPAY_ID)}`, W / 2, pad + 90 + qs + 70);
+  x.font = '600 46px system-ui, "Noto Sans Thai", sans-serif'; x.fillStyle = '#444';
+  x.fillText(`${fmtBaht(Dn.amount)} THB`, W / 2, pad + 90 + qs + 140);
+  const blob = await canvasToBlob(c, 'image/png');
+  downloadBlob(blob, `KT-Scan-donate-${fmtBaht(Dn.amount).replace(/,/g, '')}.png`);
+  toast(t('donate.saved'), 1800, 'ok');
+}
+
+function initDonate() {
+  const dlg = $('#dlgDonate');
+  closeOnBackdrop(dlg);
+  $('#btnHomeDonate').addEventListener('click', openDonate);
+  chipGroup($('#dnAmts'), (v) => { Dn.amount = +v; $('#dnCustom').value = ''; dnRender(); });
+  $('#dnCustom').addEventListener('input', () => {
+    $$('#dnAmts button').forEach((b) => b.classList.remove('on'));
+    const raw = $('#dnCustom').value.trim();
+    if (raw === '') { $$('#dnAmts button').forEach((b) => b.classList.toggle('on', +b.dataset.v === Dn.amount)); }
+    dnRender();
+  });
+  $('#dnCopy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(PROMPTPAY_ID); }
+    catch (e) { const ta = document.createElement('textarea'); ta.value = PROMPTPAY_ID; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e2) { /* ignore */ } ta.remove(); }
+    toast(t('donate.copied'), 1600, 'ok');
+  });
+  $('#dnSave').addEventListener('click', () => dnSaveImage().catch((e) => { console.error(e); toast(t('err.export'), 2500, 'err'); }));
+  $('#dnDone').addEventListener('click', () => { dlg.close(); toast(t('donate.thanks'), 3200, 'ok'); });
+}
+
 /* ---- 90-main.js ---- */
 /* ====================================================================
    MAIN — startup, global shortcuts, drag & drop
@@ -3537,7 +4406,7 @@ async function init() {
     S.docs = recs.map(hydrateDoc);
   } catch (e) { console.error(e); S.docs = []; }
 
-  initCamera(); initEditor(); initLibrary(); initExport();
+  initCamera(); initEditor(); initLibrary(); initExport(); initDonate();
 
   document.addEventListener('pointerdown', () => audio(), { once: true, passive: true });
   window.addEventListener('pagehide', () => { flushSave(); });
